@@ -1,6 +1,6 @@
 import { test } from '@playwright/test'
 
-// test.beforeAll(() => {  //usually for DB
+// test.beforeAll(() => {  //usually for DB but rear
 // }) 
 
 test.beforeEach(async ({ page }) => {
