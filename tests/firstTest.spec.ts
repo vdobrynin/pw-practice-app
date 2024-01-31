@@ -7,29 +7,30 @@ test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:4200/')
 })
 
-test.describe('suite1', () => {
+test.describe('suite 1', () => {
     test.beforeEach(async ({ page }) => {
-        await page.getByText('Charts').click()
-    })
-    test('the first test', async ({ page }) => {
-        await page.getByText('Form Layouts').click()
+        await page.getByText('Tables & Data').click()
     })
 
-    test('navigate to datepicker page1', async ({ page }) => {
-        await page.getByText('Datepicker').click()
+    test('the smart table page', async ({ page }) => {
+        await page.getByText('Smart Table').click()
+    })
+
+    test('the tree grid page', async ({ page }) => {
+        await page.getByText('Tree Grid').click()
     })
 })
 
-test.describe('suite2', () => {
+test.describe('suite 2', () => {
     test.beforeEach(async ({ page }) => {
         await page.getByText('Forms').click()
     })
 
-    test('the first test', async ({ page }) => {
+    test('the layouts page', async ({ page }) => {
         await page.getByText('Form Layouts').click()
     })
 
-    test('navigate to datepicker page2', async ({ page }) => {
+    test('navigate to datepicker page', async ({ page }) => {
         await page.getByText('Datepicker').click()
     })
 })
