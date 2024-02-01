@@ -5,32 +5,29 @@ import { test } from '@playwright/test'
 
 test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:4200/')
+    await page.getByText('Forms').click()
+    await page.getByText('Form Layouts').click()
 })
 
-test.describe('suite 1', () => {
-    test.beforeEach(async ({ page }) => {
-        await page.getByText('Tables & Data').click()
-    })
+test('Locator syntax rules', async ({ page }) => {
+    //by Tag name
+    page.locator('input')
 
-    test('the smart table page', async ({ page }) => {
-        await page.getByText('Smart Table').click()
-    })
+    //by ID
+    page.locator('#inputEmail1')
 
-    test('the tree grid page', async ({ page }) => {
-        await page.getByText('Tree Grid').click()
-    })
-})
+    //by Class value
+    page.locator('.shape-rectangle')
 
-test.describe('suite 2', () => {
-    test.beforeEach(async ({ page }) => {
-        await page.getByText('Forms').click()
-    })
+    //by attribute
+    page.locator('[placeholder="Email"]')
 
-    test('the layouts page', async ({ page }) => {
-        await page.getByText('Form Layouts').click()
-    })
+    //by Class value (full)
+    page.locator('[class="input-full-width size-medium status-basic shape-rectangle nb-transition"]')
 
-    test('navigate to datepicker page', async ({ page }) => {
-        await page.getByText('Datepicker').click()
-    })
+    // //combine different selectors
+    // page.locator('input[placeholder="Email"].shape-rectangle') //do not put space between
+
+    //combine different selectors
+    page.locator('input[placeholder="Email"][nbinput]') //do not put space between even 2nd attr
 })
