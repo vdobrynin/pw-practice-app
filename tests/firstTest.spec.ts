@@ -30,4 +30,7 @@ test('Locator syntax rules', async ({ page }) => {
 
     //combine different selectors
     page.locator('input[placeholder="Email"][nbinput]') //do not put space between even 2nd attr
-})
+
+    //by XPath (NOT RECOMMENDED)
+    page.locator('//*[@id="inputEmail1]')
+}
