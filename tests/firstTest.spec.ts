@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
 
 test('Locator syntax rules', async ({ page }) => {
     //by Tag name
-    await page.locator('input').first().click()
+    await page.locator('input').first().click() //find first input
 
     //by ID
     page.locator('#inputEmail1')
