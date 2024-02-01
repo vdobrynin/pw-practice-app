@@ -51,7 +51,7 @@ test('User facing locators', async ({ page }) => {
 
     await page.getByText('Using the Grid').click()
 
-    // await page.getByTitle('IoT Dashboard').click()
+    await page.getByTestId('SignIn').click() //custom id by me
 
-    await page.getByTestId('SignIn').click() //custom id
+    await page.getByTitle('IoT Dashboard').click()
 })
