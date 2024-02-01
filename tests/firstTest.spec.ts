@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
 
 test('Locator syntax rules', async ({ page }) => {
     //by Tag name
-    page.locator('input')
+    await page.locator('input').first().click()
 
     //by ID
     page.locator('#inputEmail1')
@@ -33,4 +33,10 @@ test('Locator syntax rules', async ({ page }) => {
 
     //by XPath (NOT RECOMMENDED)
     page.locator('//*[@id="inputEmail1]')
-}
+
+    //by partial page match
+    page.locator(':text("Using)')
+
+    //by exact text match
+    page.locator(':text-is("Using the Grid)')
+})
