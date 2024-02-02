@@ -93,5 +93,5 @@ test('reusing the locators', async ({ page }) => {
     await basicForm.locator('nb-checkbox').click()
     await basicForm.getByRole('button').click()
 
-    await expect(emailField).toHaveValue('test@test.com')
+    await expect(emailField).toHaveValue('test@test.com') // assertion
 })
