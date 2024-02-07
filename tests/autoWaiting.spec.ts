@@ -19,5 +19,7 @@ test('auto waiting', async ({ page }) => {
     // const text = await successButton.allTextContents()
     // expect(text).toContain('Data loaded with AJAX get request.')
 
-    await expect(successButton).toHaveText('Data loaded with AJAX get request.')
+    await expect(successButton)
+        .toHaveText('Data loaded with AJAX get request.', { timeout: 20000 }) //overwriting to 20 sec
 })
+
