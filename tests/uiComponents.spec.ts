@@ -15,5 +15,16 @@ test.describe('Form Layouts page', () => {
             .getByRole('textbox', { name: "Email" })
 
         await usingTheGridEmailInput.fill('test@test.com')
+        await usingTheGridEmailInput.clear()
+        await usingTheGridEmailInput.pressSequentially('test2@test.com')
+        // await usingTheGridEmailInput.pressSequentially('test2@test.com', { delay: 300 })
+
+        //generic assertion
+        const inputValue = await usingTheGridEmailInput.inputValue()
+        expect(inputValue).toEqual('test2@test.com')
+
+        //locator assertion
+        expect(inputValue).toEqual('test2@test.com')
+        await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')
     })
 })
