@@ -32,7 +32,7 @@ test.describe('Form Layouts page', () => {
         const usingTheGridForm = page.locator('nb-card', { hasText: "Using the Grid" })
 
         // await usingTheGridForm.getByLabel('Option 1')
-        //     .check({ force: true })         //to click use {force: true} --> cause it's invisible  
+        //     .check({ force: true })         //to click use {force: true} --> cause it's hidden  
         await usingTheGridForm.getByRole('radio', { name: "Option 1" })
             .check({ force: true })
 
