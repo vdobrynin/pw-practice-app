@@ -174,7 +174,7 @@ test('web tables', async ({ page }) => {
 })
 
 test('datepicker', async ({ page }) => {
-    // datepicker part1
+    //                                         // datepicker part1
     await page.getByText('Forms').click()
     await page.getByText('Datepicker').click()
 
@@ -182,5 +182,5 @@ test('datepicker', async ({ page }) => {
     await calendarInputField.click()
 
     await page.locator('[class="day-cell ng-star-inserted"]')
-        .getByText('7', { exact: true }).click() // wait only of this month locator
+        .getByText('7', { exact: true }).click()// wait only of this month locator & use {exact: true}
 })
