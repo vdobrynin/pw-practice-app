@@ -181,5 +181,8 @@ test('datepicker', async ({ page }) => {
     const calendarInputField = page.getByPlaceholder('Form Picker')
     await calendarInputField.click()
 
-    await page.locator('[class="day-cell ng-star-inserted"]').getByText('17').click()                 // wait only of this month locator
+    await page.locator('[class="day-cell ng-star-inserted"]')
+        .getByText('12').click() // wait only of this month locator
+
+    // await page.locator('[class="day-cell ng-star-inserted"]').getByText('15').first().click() 
 })
