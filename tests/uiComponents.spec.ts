@@ -182,7 +182,7 @@ test('datepicker', async ({ page }) => {
     await calendarInputField.click()
 
     let date = new Date()
-    date.setDate(date.getDate() + 15)
+    date.setDate(date.getDate() + 400)
     const expectedDate = date.getDate().toString() // dynamic date + 1 --> to find date
     const expectedMonthShort = date.toLocaleString('En-US', { month: 'short' }) // short month
     const expectedMonthLong = date.toLocaleString('En-US', { month: 'long' }) // long month
