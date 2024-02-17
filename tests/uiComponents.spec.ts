@@ -181,7 +181,14 @@ test('datepicker', async ({ page }) => {
     const calendarInputField = page.getByPlaceholder('Form Picker')
     await calendarInputField.click()
 
+    let date = new Date()
+    date.setDate(date.getDate() + 1)
+    const expectedDate = date.getDate().toString() // dynamic date + 1 --> to find date
+    const expectedMonthShort = date.toLocaleString('En-US', { month: 'short' }) // short month
+    const expectedYear = date.getFullYear()
+    const dateToAssert = `${expectedMonthShort} ${expectedDate}, ${expectedYear}`
+
     await page.locator('[class="day-cell ng-star-inserted"]')
-        .getByText('7', { exact: true }).click()// wait only of this month locator & use {exact: true}
-    await expect(calendarInputField).toHaveValue('Feb 7, 2024')
+        .getByText(expectedDate, { exact: true }).click()// wait only of this month locator & use {exact: true}
+    await expect(calendarInputField).toHaveValue(dateToAssert)
 })
