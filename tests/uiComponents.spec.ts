@@ -182,11 +182,21 @@ test('datepicker', async ({ page }) => {
     await calendarInputField.click()
 
     let date = new Date()
-    date.setDate(date.getDate() + 1)
+    date.setDate(date.getDate() + 15)
     const expectedDate = date.getDate().toString() // dynamic date + 1 --> to find date
     const expectedMonthShort = date.toLocaleString('En-US', { month: 'short' }) // short month
+    const expectedMonthLong = date.toLocaleString('En-US', { month: 'long' }) // long month
     const expectedYear = date.getFullYear()
     const dateToAssert = `${expectedMonthShort} ${expectedDate}, ${expectedYear}`
+
+    let calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+    const expectedMonthAndYear = `${expectedMonthLong} ${expectedYear}`
+
+    while (!calendarMonthAndYear.includes(expectedMonthAndYear)) {
+        await page.locator('nb-calendar-pageable-navigation [data-name="chevron-right"]')
+            .click()
+        calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+    }
 
     await page.locator('[class="day-cell ng-star-inserted"]')
         .getByText(expectedDate, { exact: true }).click()// wait only of this month locator & use {exact: true}
