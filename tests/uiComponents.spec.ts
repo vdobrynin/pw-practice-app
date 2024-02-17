@@ -183,4 +183,5 @@ test('datepicker', async ({ page }) => {
 
     await page.locator('[class="day-cell ng-star-inserted"]')
         .getByText('7', { exact: true }).click()// wait only of this month locator & use {exact: true}
+    await expect(calendarInputField).toHaveValue('Feb 7, 2024')
 })
