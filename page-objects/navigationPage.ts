@@ -15,24 +15,23 @@ export class NavigationPage {
 
     async datepickerPage() {
         await this.selectGroupMenuItem('Forms')
-        await this.page.waitForTimeout(1000)
         await this.page.getByText('Datepicker').click()
 
     }
 
     async smartTablePage() {
-        await this.page.getByText('Tables & Data').click()
+        await this.selectGroupMenuItem('Tables & Data')
         await this.page.getByText('Smart Table').click()
     }
 
     async toastr() {
-        await this.page.getByText('Modal & Overlays').click()
+        await this.selectGroupMenuItem('Modal & Overlays')
         await this.page.getByText('Toastr').click()
 
     }
 
     async tooltip() {
-        await this.page.getByText('Modal & Overlays').click()
+        await this.selectGroupMenuItem('Modal & Overlays')
         await this.page.getByText('Tooltip').click()
     }
 
