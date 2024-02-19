@@ -25,6 +25,5 @@ test('parametrized methods', async ({ page }) => {
         .submitUsingTheGridFormWithCredentialsAndSelectedOption('test@test.com', 'Welcome1', 'Option 2')
     await onFormLayoutsPage
         .submitInLineFormWithNameEmailAndCheckbox('John Smith', 'john@test.com', true)
-
 })
 
