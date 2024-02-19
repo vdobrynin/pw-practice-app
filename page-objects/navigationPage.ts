@@ -24,13 +24,13 @@ export class NavigationPage {
         await this.page.getByText('Smart Table').click()
     }
 
-    async toastr() {
+    async toastrPage() {
         await this.selectGroupMenuItem('Modal & Overlays')
         await this.page.getByText('Toastr').click()
 
     }
 
-    async tooltip() {
+    async tooltipPage() {
         await this.selectGroupMenuItem('Modal & Overlays')
         await this.page.getByText('Tooltip').click()
     }
