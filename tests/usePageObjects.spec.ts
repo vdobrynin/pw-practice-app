@@ -29,6 +29,6 @@ test('parametrized methods', async ({ page }) => {
     await onFormLayoutsPage
         .submitInLineFormWithNameEmailAndCheckbox('John Smith', 'john@test.com', true)
     await navigateTo.datepickerPage()
-    await onDatepickerPage
-        .selectCommonDatePickerDateFromToday(5)
+    await onDatepickerPage.selectCommonDatePickerDateFromToday(10)
+    await onDatepickerPage.selectDatepickerWithRangeFromToday(6, 15)
 })
