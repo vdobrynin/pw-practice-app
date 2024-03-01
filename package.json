@@ -4,11 +4,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bondar-artem/pw-practice-app.git"
+    "url": "git+https://github.com/vdobrynin/pw-practice-app.git"
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve"
+    "start": "ng serve",
+    "pageObjects-chrome":"npx playwright test usePageObjects.spec.ts --project=chromium"
   },
   "dependencies": {
     "@angular/animations": "^14.2.12",
@@ -60,7 +61,7 @@
     "@angular/language-service": "14.2.12",
     "@compodoc/compodoc": "^1.1.19",
     "@fortawesome/fontawesome-free": "^5.2.0",
-    "@playwright/test": "^1.41.2",
+    "@playwright/test": "^1.42.0",
     "@types/leaflet": "1.2.3",
     "@types/node": "^12.12.70",
     "codelyzer": "^0.0.28",

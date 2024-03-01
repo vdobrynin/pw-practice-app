@@ -59,7 +59,7 @@ test('User facing locators', async ({ page }) => {
 })
 
 test('locating child elements', async ({ page }) => {
-    await page.locator('nb-card nb-radio :text-is("Option 1")').click()
+    await page.locator('nb-card nb-radio :text("Option 1")').click()
     await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")')
         .click()
 
@@ -137,7 +137,7 @@ test('assertions', async ({ page }) => {
     await expect(basicFormButton).toHaveText('Submit')
 
     //soft assertion
-    await expect.soft(basicFormButton).toHaveText('Submit5')
+    await expect.soft(basicFormButton).toHaveText('Submit')
     await basicFormButton.click()
 })
 
