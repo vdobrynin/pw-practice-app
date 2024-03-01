@@ -9,10 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "pageObjects-chromium": "npx playwright test usePageObjects.spec.ts --project=chromium",
-    "pageObjects-firefox": "npx playwright test usePageObjects.spec.ts --project=firefox",
-    "pageObjects-webkit": "npx playwright test usePageObjects.spec.ts --project=webkit",
-    "pageObjects-all": "npm run pageObjects-chromium && npm run pageObjects-firefox && npm run pageObjects-webkit"
+    "pageObjects-chrome": "npx playwright test usePageObjects.spec.ts --project=chromium"
   },
   "dependencies": {
     "@angular/animations": "^14.2.12",
@@ -63,6 +60,7 @@
     "@angular/compiler-cli": "^14.2.12",
     "@angular/language-service": "14.2.12",
     "@compodoc/compodoc": "^1.1.19",
+    "@faker-js/faker": "^8.4.1",
     "@fortawesome/fontawesome-free": "^5.2.0",
     "@playwright/test": "^1.42.0",
     "@types/leaflet": "1.2.3",
