@@ -18,7 +18,7 @@ test('navigate to form page', async ({ page }) => {
 test('parametrized methods', async ({ page }) => {
     const pm = new PageManager(page)
     const randomFullName = faker.person.fullName()
-    const randomEmail = `${randomFullName.replace(' ', '')}${faker.number.int(1000)}@test.com`
+    const randomEmail = `${randomFullName.replace(/\s+/g, '')}${faker.number.int(1000)}@test.com`
 
     await pm.navigateTo()
         .formLayoutsPage()
