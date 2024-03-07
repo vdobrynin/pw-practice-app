@@ -7,12 +7,17 @@ test.beforeEach(async ({ page }) => {
 })
 
 test.describe('Form Layouts page', () => {
+    test.describe.configure({ retries: 2 })         //---> retries to testing this tests twice 
+
     test.beforeEach(async ({ page }) => {
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
     })
 
-    test('input fields', async ({ page }) => {
+    test('input fields', async ({ page }, testInfo) => {
+        if (testInfo.retry) {                             // ---> example before next retry cleanup DB
+            // do something
+        }
         const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" })
             .getByRole('textbox', { name: "Email" })
 
@@ -24,6 +29,7 @@ test.describe('Form Layouts page', () => {
         //generic assertion
         const inputValue = await usingTheGridEmailInput.inputValue()
         expect(inputValue).toEqual('test2@test.com')
+        // expect(inputValue).toEqual('test2@test.com1')       // for test retry example for test fail
 
         //locator assertion
         expect(inputValue).toEqual('test2@test.com')
