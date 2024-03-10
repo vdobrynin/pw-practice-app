@@ -1,6 +1,7 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '@playwright/test';
 
 test('drag & drop with iframes', async ({ page }) => {
+
     await page.goto('https://www.globalsqa.com/demo-site/draganddrop/')
 
     const frame = page.frameLocator('[rel-title="Photo Manager"] iframe')
@@ -13,6 +14,5 @@ test('drag & drop with iframes', async ({ page }) => {
     await frame.locator('#trash').hover()
     await page.mouse.up()
 
-    await expect(frame.locator('#trash li h5'))
-        .toHaveText(["High Tatras 2", "High Tatras 4"]) //findTrashThen child.El.Then 2nd child.El.
+    await expect(frame.locator('#trash li h5')).toHaveText(["High Tatras 2", "High Tatras 4"]) //findTrashThen child.El.Then 2nd child.El.
 })

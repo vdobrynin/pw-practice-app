@@ -1,5 +1,5 @@
-import { Page } from "playwright/test"
-import { HelperBase } from "./helperBase"
+import { Page } from "playwright/test";
+import { HelperBase } from "./helperBase";
 
 export class NavigationPage extends HelperBase {
 
@@ -10,13 +10,12 @@ export class NavigationPage extends HelperBase {
     async formLayoutsPage() {
         await this.selectGroupMenuItem('Forms')
         await this.page.getByText('Form Layouts').click()
-        await this.waitForNumberOfSeconds(1)
+        await this.waitForNumberOfSeconds(2)
     }
 
     async datepickerPage() {
         await this.selectGroupMenuItem('Forms')
         await this.page.getByText('Datepicker').click()
-
     }
 
     async smartTablePage() {
@@ -36,6 +35,7 @@ export class NavigationPage extends HelperBase {
     }
 
     private async selectGroupMenuItem(groupItemTitle: string) {
+
         const groupMenuItem = this.page.getByTitle(groupItemTitle)
         const expandedState = await groupMenuItem.getAttribute('aria-expanded')
         if (expandedState == 'false') {

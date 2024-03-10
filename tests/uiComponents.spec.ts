@@ -1,13 +1,12 @@
-import { test, expect } from '@playwright/test'
-import { dialog } from 'electron'
-import { filter } from 'rxjs/operators'
+import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:4200/')
 })
 
 test.describe('Form Layouts page', () => {
-    test.describe.configure({ retries: 2 })         //---> retries to testing this tests twice 
+
+    test.describe.configure({ retries: 2 })         //---> retries to testing this tests TWICE
 
     test.beforeEach(async ({ page }) => {
         await page.getByText('Forms').click()
@@ -15,21 +14,21 @@ test.describe('Form Layouts page', () => {
     })
 
     test('input fields', async ({ page }, testInfo) => {
+
         if (testInfo.retry) {                             // ---> example before next retry cleanup DB
             // do something
         }
-        const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" })
-            .getByRole('textbox', { name: "Email" })
+        const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" }).getByRole('textbox', { name: "Email" })
 
         await usingTheGridEmailInput.fill('test@test.com')
         await usingTheGridEmailInput.clear()
-        await usingTheGridEmailInput.pressSequentially('test2@test.com')
-        // await usingTheGridEmailInput.pressSequentially('test2@test.com', { delay: 300 })
+        await usingTheGridEmailInput.type('test2@test.com')
+        // await usingTheGridEmailInput.type('test2@test.com', { delay: 500 })
 
         //generic assertion
         const inputValue = await usingTheGridEmailInput.inputValue()
         expect(inputValue).toEqual('test2@test.com')
-        // expect(inputValue).toEqual('test2@test.com1')       // for test retry example for test fail
+        // expect(inputValue).toEqual('test2@test.com1')       // for test retry example for test to fail
 
         //locator assertion
         expect(inputValue).toEqual('test2@test.com')
@@ -37,29 +36,24 @@ test.describe('Form Layouts page', () => {
     })
 
     test('radio buttons', async ({ page }) => {
+
         const usingTheGridForm = page.locator('nb-card', { hasText: "Using the Grid" })
 
-        // await usingTheGridForm.getByLabel('Option 1')
-        //     .check({ force: true })         //to click use {force: true} --> cause it's hidden  
-        await usingTheGridForm.getByRole('radio', { name: "Option 1" })
-            .check({ force: true })
+        // await usingTheGridForm.getByLabel('Option 1').check({ force: true }) //to click use {force: true} --> cause it's hidden  
+        await usingTheGridForm.getByRole('radio', { name: "Option 1" }).check({ force: true })
 
-        const radioStatus = await usingTheGridForm.getByRole('radio', { name: "Option 1" })
-            .isChecked()
+        const radioStatus = await usingTheGridForm.getByRole('radio', { name: "Option 1" }).isChecked()
         expect(radioStatus).toBeTruthy()
-        await expect(usingTheGridForm.getByRole('radio', { name: "Option 1" }))
-            .toBeChecked()
+        await expect(usingTheGridForm.getByRole('radio', { name: "Option 1" })).toBeChecked()
 
-        await usingTheGridForm.getByRole('radio', { name: "Option 2" })
-            .check({ force: true })
-        expect(await usingTheGridForm.getByRole('radio', { name: "Option 1" }).isChecked())
-            .toBeFalsy()
-        expect(await usingTheGridForm.getByRole('radio', { name: "Option 2" }).isChecked())
-            .toBeTruthy()
+        await usingTheGridForm.getByRole('radio', { name: "Option 2" }).check({ force: true })
+        expect(await usingTheGridForm.getByRole('radio', { name: "Option 1" }).isChecked()).toBeFalsy()
+        expect(await usingTheGridForm.getByRole('radio', { name: "Option 2" }).isChecked()).toBeTruthy()
     })
 })
 
 test('checkboxes', async ({ page }) => {
+
     await page.getByText('Modal & Overlays').click()
     await page.getByText('Toastr').click()
 
@@ -79,6 +73,7 @@ test('checkboxes', async ({ page }) => {
 })
 
 test('lists and dropouts', async ({ page }) => {
+
     const dropDownMenu = page.locator('ngx-header nb-select')
     await dropDownMenu.click()
 
@@ -86,11 +81,11 @@ test('lists and dropouts', async ({ page }) => {
     page.getByRole('listitem')  // when the list has LI tag
 
     // const optionList = page.getByRole('list').locator('nb-option')
-    const optionList = page.locator('nb-option-list nb-option')     // teacher prefer!
-    await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"]) // check to all
-    await optionList.filter({ hasText: "Cosmic" }).click()  // cosmic only
+    const optionList = page.locator('nb-option-list nb-option')     // ---> teacher prefer !!!
+    await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"]) // --> check to all
+    await optionList.filter({ hasText: "Cosmic" }).click()  // --> cosmic only
 
-    const header = page.locator('nb-layout-header')         // check the header color
+    const header = page.locator('nb-layout-header')         // --> check the header color
     await expect(header).toHaveCSS('background-color', 'rgb(50, 50, 89)')
 
     const colors = {
@@ -111,6 +106,7 @@ test('lists and dropouts', async ({ page }) => {
 })
 
 test('tooltips', async ({ page }) => {
+
     await page.getByText('Modal & Overlays').click()
     await page.getByText('Tooltip').click()
 
@@ -123,6 +119,7 @@ test('tooltips', async ({ page }) => {
 })
 
 test('dialog boxes', async ({ page }) => {
+
     await page.getByText('Tables & Data').click()
     await page.getByText('Smart Table').click()
 
@@ -131,12 +128,12 @@ test('dialog boxes', async ({ page }) => {
         dialog.accept()
     })
 
-    await page.getByRole('table').locator('tr', { hasText: 'mdo@gmail.com' })
-        .locator('.nb-trash').click()
+    await page.getByRole('table').locator('tr', { hasText: 'mdo@gmail.com' }).locator('.nb-trash').click()
     await expect(page.locator('table tr').first()).not.toHaveText('mdo@gmail.com')
 })
 
 test('web tables', async ({ page }) => {
+
     await page.getByText('Tables & Data').click()
     await page.getByText('Smart Table').click()
 
@@ -149,8 +146,7 @@ test('web tables', async ({ page }) => {
 
     // 2nd get the row based on the value in the specific column
     await page.locator('.ng2-smart-pagination-nav').getByText('2').click()
-    const targetRowById = page.getByRole('row', { name: '11' })
-        .filter({ has: page.locator('td').nth(1).getByText('11') })
+    const targetRowById = page.getByRole('row', { name: '11' }).filter({ has: page.locator('td').nth(1).getByText('11') })
     await targetRowById.locator('.nb-edit').click()
 
     await page.locator('input-editor').getByPlaceholder('E-mail').clear()
@@ -164,7 +160,7 @@ test('web tables', async ({ page }) => {
     for (let age of ages) {
         await page.locator('input-filter').getByPlaceholder('Age').clear()
         await page.locator('input-filter').getByPlaceholder('Age').fill(age)
-        await page.waitForTimeout(500)              // hardcoded delay
+        await page.waitForTimeout(1000)              // hardcoded delay
 
         const ageRows = page.locator('tbody tr')
         for (let row of await ageRows.all()) {
@@ -188,10 +184,10 @@ test('datepicker', async ({ page }) => {
     await calendarInputField.click()
 
     let date = new Date()
-    date.setDate(date.getDate() + 400) // this is hardcoded days
-    const expectedDate = date.getDate().toString() // dynamic date + 1 --> to find date
-    const expectedMonthShort = date.toLocaleString('En-US', { month: 'short' }) // short month
-    const expectedMonthLong = date.toLocaleString('En-US', { month: 'long' }) // long month
+    date.setDate(date.getDate() + 445)              // this is hardcoded days
+    const expectedDate = date.getDate().toString()          // dynamic date + 1 --> to find date
+    const expectedMonthShort = date.toLocaleString('En-US', { month: 'short' })     // short month
+    const expectedMonthLong = date.toLocaleString('En-US', { month: 'long' })   // long month
     const expectedYear = date.getFullYear()
     const dateToAssert = `${expectedMonthShort} ${expectedDate}, ${expectedYear}`
 
@@ -199,13 +195,11 @@ test('datepicker', async ({ page }) => {
     const expectedMonthAndYear = `${expectedMonthLong} ${expectedYear}`
 
     while (!calendarMonthAndYear.includes(expectedMonthAndYear)) {
-        await page.locator('nb-calendar-pageable-navigation [data-name="chevron-right"]')
-            .click()
+        await page.locator('nb-calendar-pageable-navigation [data-name="chevron-right"]').click()
         calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
     }
 
-    await page.locator('[class="day-cell ng-star-inserted"]')
-        .getByText(expectedDate, { exact: true }).click()// wait only of this month locator & use {exact: true}
+    await page.locator('[class="day-cell ng-star-inserted"]').getByText(expectedDate, { exact: true }).click()//wait only of this month locator & use {exact: true}
     await expect(calendarInputField).toHaveValue(dateToAssert)
 })
 
@@ -234,4 +228,3 @@ test('sliders', async ({ page }) => {
     await page.mouse.up()                   // finish
     await expect(tempBox).toContainText('30')
 })
-

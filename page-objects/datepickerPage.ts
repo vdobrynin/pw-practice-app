@@ -1,5 +1,5 @@
-import { Page, expect } from "playwright/test"
-import { HelperBase } from "./helperBase"
+import { Page, expect } from "playwright/test";
+import { HelperBase } from "./helperBase";
 
 export class DatepickerPage extends HelperBase {
 
@@ -8,22 +8,28 @@ export class DatepickerPage extends HelperBase {
     }
 
     async selectCommonDatePickerDateFromToday(numberOfDaysFromToday: number) {
+
         const calendarInputField = this.page.getByPlaceholder('Form Picker')
         await calendarInputField.click()
+
         const dateToAssert = await this.selectDateInTheCalendar(numberOfDaysFromToday)
-        await expect(calendarInputField).toHaveValue(dateToAssert) // assertion for once datepicker
+        await expect(calendarInputField).toHaveValue(dateToAssert) //---> assertion for once datepicker
     }
 
     async selectDatepickerWithRangeFromToday(statDateFromToday: number, endDateFromToday: number) {
+
         const calendarInputField = this.page.getByPlaceholder('Range Picker')
         await calendarInputField.click()
+
         const dateToAssertStart = await this.selectDateInTheCalendar(statDateFromToday)
         const dateToAssertEnd = await this.selectDateInTheCalendar(endDateFromToday)
+
         const dateToAssert = `${dateToAssertStart} - ${dateToAssertEnd}`
-        await expect(calendarInputField).toHaveValue(dateToAssert) // assertion for range datepicker
+        await expect(calendarInputField).toHaveValue(dateToAssert) //---> assertion for range datepicker
     }
 
     private async selectDateInTheCalendar(numberOfDaysFromToday: number) {
+
         let date = new Date()
         date.setDate(date.getDate() + numberOfDaysFromToday)
         const expectedDate = date.getDate().toString()          // dynamic date + 1 --> to find date
@@ -40,8 +46,10 @@ export class DatepickerPage extends HelperBase {
                 .click()
             calendarMonthAndYear = await this.page.locator('nb-calendar-view-mode').textContent()
         }
+
         const dayCell = this.page.locator('[class="day-cell ng-star-inserted"]')
         const rangeCell = this.page.locator('[class="range-cell day-cell ng-star-inserted"]')
+
         if (await dayCell.first().isVisible()) {
             await dayCell.getByText(expectedDate, { exact: true }).click()
         } else {
