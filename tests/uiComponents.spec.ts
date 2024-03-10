@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
 
 test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:4200/')
@@ -22,7 +22,7 @@ test.describe('Form Layouts page', () => {
 
         await usingTheGridEmailInput.fill('test@test.com')
         await usingTheGridEmailInput.clear()
-        await usingTheGridEmailInput.type('test2@test.com')
+        await usingTheGridEmailInput.pressSequentially('test2@test.com')
         // await usingTheGridEmailInput.type('test2@test.com', { delay: 500 })
 
         //generic assertion
@@ -160,7 +160,7 @@ test('web tables', async ({ page }) => {
     for (let age of ages) {
         await page.locator('input-filter').getByPlaceholder('Age').clear()
         await page.locator('input-filter').getByPlaceholder('Age').fill(age)
-        await page.waitForTimeout(1000)              // hardcoded delay
+        await page.waitForTimeout(500)
 
         const ageRows = page.locator('tbody tr')
         for (let row of await ageRows.all()) {
