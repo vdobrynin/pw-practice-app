@@ -1,12 +1,15 @@
 import { test, expect } from '@playwright/test'
 
+// test.describe.configure({ mode: 'parallel' }) // ---> to run in parallel only this file
+
 test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:4200/')
 })
 
 test.describe('Form Layouts page', () => {
 
-    test.describe.configure({ retries: 2 })         //---> retries to testing this tests TWICE
+    test.describe.configure({ retries: 2 })       //---> retries to testing this tests TWICE
+    // test.describe.configure({ mode: 'serial' })//-> if input test fails, then radio buttons will executed  
 
     test.beforeEach(async ({ page }) => {
         await page.getByText('Forms').click()
