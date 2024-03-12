@@ -1,15 +1,16 @@
 import { defineConfig, devices } from '@playwright/test';
+import type { TestOptions } from './test-options';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config();
+require('dotenv').config();  //---> for env  
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+export default defineConfig<TestOptions>({
   timeout: 50000,
   globalTimeout: 90000,
 
@@ -18,7 +19,7 @@ export default defineConfig({
   },
   testDir: './tests',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -30,8 +31,14 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
+    // baseURL: 'http://127.0.0.1:3000',              // ---> default url
     baseURL: 'http://localhost:4200/',
-    // baseURL: 'http://127.0.0.1:3000', // ---> default url
+
+    globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
+
+    // baseURL: process.env.DEV === '1' ? 'http://localhost:4200/'
+    //   : process.env.STAGING === '1' ? 'http://localhost:4202/'
+    //     : 'http://localhost:4201/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -47,16 +54,28 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'dev',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:4201/'
+      },
+    },
+    {
+      name: 'staging',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:4202/'
+      },
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
       // fullyParallel: true 
     },
-
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },

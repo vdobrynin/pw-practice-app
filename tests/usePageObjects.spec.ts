@@ -26,7 +26,7 @@ test('parametrized methods', async ({ page }) => {
 
     await pm.navigateTo().formLayoutsPage()
     await pm.onFormLayoutsPage()
-        .submitUsingTheGridFormWithCredentialsAndSelectedOption('test@test.com', 'Welcome1', 'Option 2')
+        .submitUsingTheGridFormWithCredentialsAndSelectedOption(process.env.USERNAME, process.env.PASSWORD, 'Option 2')
     // await page.screenshot({ path: 'screenshots/formsLayoutsPage.png' }) //--->screenshot for test
     // const buffer = await page.screenshot()   // save in binary 
     // console.log(buffer.toString('base64'))
