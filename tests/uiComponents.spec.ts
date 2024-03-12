@@ -1,17 +1,17 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '@playwright/test';
 
-// test.describe.configure({ mode: 'parallel' }) // ---> to run in parallel only this file
-
+/* test.describe.configure({ mode: 'parallel' }) // ---> to run in parallel only this file*/
 test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:4200/')
+    await page.goto('/'); //---> after setup env var url at config
 })
 
 test.describe('Form Layouts page', () => {
 
-    test.describe.configure({ retries: 2 })       //---> retries to testing this tests TWICE
-    // test.describe.configure({ mode: 'serial' })//-> if input test fails, then radio buttons will executed  
+    test.describe.configure({ retries: 2 })    //---> retries to testing this tests TWICE
+    // test.describe.configure({ mode: 'serial' })//--> if input test fails, then radio buttons will executed  
 
     test.beforeEach(async ({ page }) => {
+
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
     })
@@ -40,6 +40,7 @@ test.describe('Form Layouts page', () => {
 
     test('radio buttons', async ({ page }) => {
 
+        await page.waitForTimeout(300)
         const usingTheGridForm = page.locator('nb-card', { hasText: "Using the Grid" })
 
         // await usingTheGridForm.getByLabel('Option 1').check({ force: true }) //to click use {force: true} --> cause it's hidden  
@@ -163,7 +164,7 @@ test('web tables', async ({ page }) => {
     for (let age of ages) {
         await page.locator('input-filter').getByPlaceholder('Age').clear()
         await page.locator('input-filter').getByPlaceholder('Age').fill(age)
-        await page.waitForTimeout(500)
+        await page.waitForTimeout(300)
 
         const ageRows = page.locator('tbody tr')
         for (let row of await ageRows.all()) {
@@ -183,7 +184,7 @@ test('datepicker', async ({ page }) => {
     await page.getByText('Forms').click()
     await page.getByText('Datepicker').click()
 
-    const calendarInputField = page.getByPlaceholder('Form Picker')
+    const calendarInputField = await page.getByPlaceholder('Form Picker')
     await calendarInputField.click()
 
     let date = new Date()
@@ -196,9 +197,10 @@ test('datepicker', async ({ page }) => {
 
     let calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
     const expectedMonthAndYear = `${expectedMonthLong} ${expectedYear}`
+    await page.waitForTimeout(300)
 
     while (!calendarMonthAndYear.includes(expectedMonthAndYear)) {
-        await page.locator('nb-calendar-pageable-navigation [data-name="chevron-right"]').click()
+        await page.locator('nb-calendar-pageable-navigation [data-name="Layer 2"] [data-name="chevron-right"]').click()
         calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
     }
 

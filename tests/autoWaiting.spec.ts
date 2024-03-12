@@ -4,8 +4,7 @@ test.beforeEach(async ({ page }, testInfo) => {
 
     await page.goto('http://uitestingplayground.com/ajax')
     await page.getByText('Button Triggering AJAX Request').click()
-    // await page.getByText('Form Layouts').click()
-    testInfo.setTimeout(testInfo.timeout + 2000) //the way to override timeout
+    testInfo.setTimeout(testInfo.timeout + 3000) //the way to override timeout
 })
 
 test('auto waiting', async ({ page }) => {
