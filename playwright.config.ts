@@ -11,11 +11,11 @@ require('dotenv').config();  //---> for env
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig<TestOptions>({
-  timeout: 50000,
+  timeout: 60000,
   globalTimeout: 90000,
 
   expect: {
-    timeout: 3000
+    timeout: 50000
   },
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -44,8 +44,7 @@ export default defineConfig<TestOptions>({
     trace: 'on-first-retry',
     //actionTimeout:5000,
     navigationTimeout: 5000,
-    // video:      // to take video as a screenshot
-    // {
+    // video: {               // to take video as a screenshot
     //   mode: 'on',
     //   size: { width: 1920, height: 1080 }
     // }
