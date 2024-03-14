@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-/* test.describe.configure({ mode: 'parallel' }) // ---> to run in parallel only this file*/
+// test.describe.configure({ mode: 'parallel' }) // ---> to run in parallel only this file
+
 test.beforeEach(async ({ page }) => {
-    await page.goto('/'); //---> after setup env var url at config
+    await page.goto('/')                //---> after setup env var url at config
 })
 
 test.describe('Form Layouts page', () => {
@@ -11,14 +12,13 @@ test.describe('Form Layouts page', () => {
     // test.describe.configure({ mode: 'serial' })//--> if input test fails, then radio buttons will executed  
 
     test.beforeEach(async ({ page }) => {
-
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
     })
 
     test('input fields', async ({ page }, testInfo) => {
 
-        if (testInfo.retry) {                             // ---> example before next retry cleanup DB
+        if (testInfo.retry) {                      // ---> example before next retry cleanup Data Base
             // do something
         }
         const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" }).getByRole('textbox', { name: "Email" })

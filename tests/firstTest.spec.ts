@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
 
-    await page.goto('/');    // --->after setup env var url at config 
+    await page.goto('/')                    // ---> after setup env var url at config 
     await page.getByText('Forms').click()
     await page.getByText('Form Layouts').click()
 })

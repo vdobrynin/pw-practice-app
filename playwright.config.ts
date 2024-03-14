@@ -5,7 +5,7 @@ import type { TestOptions } from './test-options';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-require('dotenv').config();  //---> for env  
+require('dotenv').config();  //---> for .env  
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -15,7 +15,7 @@ export default defineConfig<TestOptions>({
   globalTimeout: 90000,
 
   expect: {
-    timeout: 50000
+    timeout: 15000
   },
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -23,31 +23,31 @@ export default defineConfig<TestOptions>({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,
+  retries: process.env.CI ? 2 : 1,        //--> make 1 retries
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 5,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',              // ---> default url
-    baseURL: 'http://localhost:4200/',
+    // baseURL: 'http://localhost:4200/',
 
     globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
 
-    // baseURL: process.env.DEV === '1' ? 'http://localhost:4200/'
-    //   : process.env.STAGING === '1' ? 'http://localhost:4202/'
-    //     : 'http://localhost:4201/',
+    baseURL: process.env.DEV === '1' ? 'http://localhost:4200/'
+      : process.env.STAGING === '1' ? 'http://localhost:4202/'
+        : 'http://localhost:4201/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    //actionTimeout:5000,
-    navigationTimeout: 5000,
-    // video: {               // to take video as a screenshot
-    //   mode: 'on',
-    //   size: { width: 1920, height: 1080 }
-    // }
+    // actionTimeout: 5000,
+    navigationTimeout: 10000,
+    video: {                //---> to take video as a screenshot of the tests
+      mode: 'on',
+      size: { width: 1920, height: 1080 }
+    }
   },
 
   /* Configure projects for major browsers */
