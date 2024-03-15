@@ -20,7 +20,7 @@ test('parametrized methods', async ({ page }) => {
 
     const pm = new PageManager(page)
     const randomFullName = faker.person.fullName()
-    //                                              //--> will replace all spaces that found in text: (/\s+/g, '')
+    //                                        //--> will replace all spaces that found in text: (/\s+/g, '')
     const randomEmail = `${randomFullName.replace(/\s+/g, '')}${faker.number.int(1000)}@test.com`
 
     await pm.navigateTo().formLayoutsPage()
