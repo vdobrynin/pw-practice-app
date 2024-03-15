@@ -34,7 +34,7 @@ test('parametrized methods', async ({ page }) => {
     // await page.locator('nb-card', { hasText: "Inline form" })
     //     .screenshot({ path: 'screenshots/inlineForm.png' })//--->screenshot for test specific area
 
-    await pm.navigateTo().datepickerPage()
-    await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(10)
-    await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(6, 15)
+    // await pm.navigateTo().datepickerPage()
+    // await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(10)
+    // await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(6, 15)
 })

@@ -11,4 +11,4 @@ test('parametrized methods', async ({ pageManager }) => { //--->remove from({, f
         .submitUsingTheGridFormWithCredentialsAndSelectedOption(process.env.USERNAME, process.env.PASSWORD, 'Option 2')
     await pageManager.onFormLayoutsPage()
         .submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)
-}) 
+})    
