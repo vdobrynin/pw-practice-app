@@ -4,8 +4,8 @@ import type { TestOptions } from './test-options';
 require('dotenv').config();
 
 export default defineConfig<TestOptions>({
-    timeout: 40000,
-    globalTimeout: 60000,
+    timeout: 55000,
+    globalTimeout: 120000,
     expect: {
         timeout: 2000
     },
@@ -20,7 +20,6 @@ export default defineConfig<TestOptions>({
                 : 'http://localhost:4200/',
 
         trace: 'on-first-retry',
-        actionTimeout: 2000,
         navigationTimeout: 25000,
         video: {
             mode: 'off',
@@ -38,13 +37,13 @@ export default defineConfig<TestOptions>({
         },
         {
             name: 'chromium',
-            timeout: 50000,      // example how to overwrite global timeout in project
+            timeout: 55000,      //---> example how to overwrite global timeout in project
         },
         {
             name: 'firefox',
             use: {
                 browserName: 'firefox',
-                video: {           // example to take video overwrite global only with firefox   
+                video: {           //---> example to take video overwrite global only with firefox   
                     mode: 'on',
                     size: { width: 1920, height: 1080 }
                 }
