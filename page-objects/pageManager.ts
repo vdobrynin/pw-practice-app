@@ -3,7 +3,6 @@ import { NavigationPage } from '../page-objects/navigationPage'
 import { FormLayoutsPage } from '../page-objects/formLayoutsPage'
 import { DatepickerPage } from '../page-objects/datepickerPage'
 
-
 export class PageManager {
 
     private readonly page: Page

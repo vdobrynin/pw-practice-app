@@ -24,6 +24,7 @@ test('auto waiting', async ({ page }) => {
 
 test('alternative waits', async ({ page }) => {
 
+    test.slow()
     const successButton = page.locator('.bg-success')
     // #1 wait for element
     await page.waitForSelector('.bg-success')

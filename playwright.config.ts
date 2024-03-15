@@ -11,11 +11,11 @@ require('dotenv').config();  //---> for .env
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig<TestOptions>({
-  timeout: 60000,
-  globalTimeout: 90000,
+  timeout: 30000,
+  globalTimeout: 100000,
 
   expect: {
-    timeout: 15000
+    timeout: 2000
   },
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -32,40 +32,40 @@ export default defineConfig<TestOptions>({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',              // ---> default url
-    // baseURL: 'http://localhost:4200/',
+    baseURL: 'http://localhost:4200/',
 
     globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
 
-    baseURL: process.env.DEV === '1' ? 'http://localhost:4200/'
-      : process.env.STAGING === '1' ? 'http://localhost:4202/'
-        : 'http://localhost:4201/',
+    // baseURL: process.env.DEV === '1' ? 'http://localhost:4200/'
+    //   : process.env.STAGING === '1' ? 'http://localhost:4202/'
+    //     : 'http://localhost:4201/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     // actionTimeout: 5000,
-    navigationTimeout: 10000,
-    video: {                //---> to take video as a screenshot of the tests
-      mode: 'on',
-      size: { width: 1920, height: 1080 }
-    }
+    navigationTimeout: 5000,
+    // video: {                //---> to take video as a screenshot of the tests
+    //   mode: 'on',
+    //   size: { width: 1920, height: 1080 }
+    // }
   },
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'dev',
-      use: {
-        ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:4201/'
-      },
-    },
-    {
-      name: 'staging',
-      use: {
-        ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:4202/'
-      },
-    },
+    // {
+    //   name: 'dev',
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     baseURL: 'http://localhost:4201/'
+    //   },
+    // },
+    // {
+    //   name: 'staging',
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     baseURL: 'http://localhost:4202/'
+    //   },
+    // },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },

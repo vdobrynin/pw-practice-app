@@ -37,7 +37,7 @@ export class NavigationPage extends HelperBase {
     private async selectGroupMenuItem(groupItemTitle: string) {
 
         const groupMenuItem = this.page.getByTitle(groupItemTitle)
-        await this.page.waitForTimeout(100)
+        await this.page.waitForTimeout(300)
         const expandedState = await groupMenuItem.getAttribute('aria-expanded')
         if (expandedState == 'false') {
             await groupMenuItem.click() // check if menu collapse or not
