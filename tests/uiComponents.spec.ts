@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/')                //---> after setup env var url at config
 })
 
-test.describe('Form Layouts page', () => {
+test.describe('Form Layouts page @block', () => {
 
     test.describe.configure({ retries: 2 })    //---> retries to testing this tests TWICE
     // test.describe.configure({ mode: 'serial' })//--> if input test fails, then radio buttons will executed  
