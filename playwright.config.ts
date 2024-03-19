@@ -13,26 +13,37 @@ require('dotenv').config();  //---> for .env
 export default defineConfig<TestOptions>({
   timeout: 50000,
   globalTimeout: 120000,
-
   expect: {
     timeout: 2000
   },
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
+
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,        //--> make 1 retries
+  retries: process.env.CI ? 2 : 1,            //--> make 1 retries ***
+
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
-  // workers: process.env.CI ? 1 : 5,          //--->this will run 5 workers, not 4  
+  // workers: process.env.CI ? 1 : 5,          //--->this will run 5 workers, not 4 *** 
+
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
+  // reporter: 'list',                        //---> below different type of reporters ***
+  // reporter: 'json',
+  // reporter: [['json', { outputFile: 'test-results/jsonReport.json' }]],
+  // reporter: [
+  //   ['json', { outputFile: 'test-results/jsonReport.json' }],
+  //   ['junit', { outputFile: 'test-results/junitReport.xml' }],
+  //   ['allure-playwright']
+  // ],
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',              // ---> default url
+    // baseURL: 'http://127.0.0.1:3000',              // ---> default url ***
     baseURL: 'http://localhost:4200/',
 
     globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
@@ -45,7 +56,7 @@ export default defineConfig<TestOptions>({
     trace: 'on-first-retry',
     actionTimeout: 20000,
     navigationTimeout: 25000,
-    video: {                //---> to take video as a screenshot of the tests
+    video: {                //---> to take video as a screenshot of the tests ***
       mode: 'off',
       size: { width: 1920, height: 1080 }
     }
@@ -81,14 +92,14 @@ export default defineConfig<TestOptions>({
       use: { ...devices['Desktop Safari'] },
     },
     {
-      name: 'mobile',                       //---> test for mobile devices
+      name: 'mobile',                       //---> test for mobile devices ***
       testMatch: 'testMobile.spec.ts',
       use: {
         ...devices['iPhone 13 Pro']
       }
     }
     // {
-    //   name: 'mobile',                       //---> test through viewport for mobile devices
+    //   name: 'mobile',                       //---> test through viewport for mobile devices ***
     //   testMatch: 'testMobile.spec.ts',
     //   use: {
     //     viewport: { width: 414, height: 800 }
