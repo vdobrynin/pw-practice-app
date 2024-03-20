@@ -14,7 +14,8 @@ export default defineConfig<TestOptions>({
   timeout: 50000,
   globalTimeout: 120000,
   expect: {
-    timeout: 2000
+    timeout: 2000,
+    // toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
   },
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -30,15 +31,16 @@ export default defineConfig<TestOptions>({
   // workers: process.env.CI ? 1 : 5,          //--->this will run 5 workers, not 4 *** 
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  // reporter: 'html',
   // reporter: 'list',                        //---> below different type of reporters ***
   // reporter: 'json',
   // reporter: [['json', { outputFile: 'test-results/jsonReport.json' }]],
-  // reporter: [
-  //   ['json', { outputFile: 'test-results/jsonReport.json' }],
-  //   ['junit', { outputFile: 'test-results/junitReport.xml' }],
-  //   ['allure-playwright']
-  // ],
+  reporter: [
+    ['json', { outputFile: 'test-results/jsonReport.json' }],
+    ['junit', { outputFile: 'test-results/junitReport.xml' }],
+    //   ['allure-playwright']
+    ['html']
+  ],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
