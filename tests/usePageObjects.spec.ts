@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { PageManager } from '../page-objects/pageManager'
 import { faker } from '@faker-js/faker'
+import { argosScreenshot } from "@argos-ci/playwright";
 
 test.beforeEach(async ({ page }) => {           // after setup env var url at config
     await page.goto('/')
@@ -43,5 +44,7 @@ test.only('testing with argos ci', async ({ page }) => {
 
     const pm = new PageManager(page)
     await pm.navigateTo().formLayoutsPage()
+    await argosScreenshot(page, "form layout page");
     await pm.navigateTo().datepickerPage()
+    await argosScreenshot(page, "datepicker page");
 })

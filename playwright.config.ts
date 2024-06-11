@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import type { TestOptions } from './test-options';
 
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -36,6 +37,16 @@ export default defineConfig<TestOptions>({
   // reporter: 'json',
   // reporter: [['json', { outputFile: 'test-results/jsonReport.json' }]],
   reporter: [
+    // Use "dot" reporter on CI, "list" otherwise (Playwright default).
+    process.env.CI ? ["dot"] : ["list"],
+    // Add Argos reporter.
+    ["@argos-ci/playwright/reporter",
+      { // Upload to Argos on CI only.
+        uploadToArgos: !!process.env.CI,
+        // Set your Argos token (required if not using GitHub Actions).
+        // token: "<YOUR-ARGOS-TOKEN>",        
+      },
+    ],
     ['json', { outputFile: 'test-results/jsonReport.json' }],
     ['junit', { outputFile: 'test-results/junitReport.xml' }],
     //   ['allure-playwright']
@@ -56,12 +67,13 @@ export default defineConfig<TestOptions>({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    // actionTimeout: 20000,
-    // navigationTimeout: 25000,
-    // video: {                //---> to take video as a screenshot of the tests ***
-    //   mode: 'off',
-    //   size: { width: 1920, height: 1080 }
-    // }
+    screenshot: "only-on-failure",           //---> Capture screenshot after each test failure.
+    actionTimeout: 20000,
+    navigationTimeout: 25000,
+    video: {                //---> to take video as a screenshot of the tests ***
+      mode: 'off',
+      size: { width: 1920, height: 1080 }
+    }
   },
 
   /* Configure projects for major browsers */
