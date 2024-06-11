@@ -36,7 +36,7 @@ export default defineConfig<TestOptions>({
             },
         },
         {
-            name: 'chromium',
+            name: 'chrome',
             timeout: 55000,      //---> example how to overwrite global timeout in project
         },
         {

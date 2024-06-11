@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: npm run pageObjects-chromium
+    command: npm run pageObjects-chrome
     volumes:
       - ./playwright-report/:/app/playwright-report
       - ./test-results/:/app/test-results

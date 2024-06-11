@@ -81,7 +81,7 @@ export default defineConfig<TestOptions>({
       },
     },
     {
-      name: 'chromium',
+      name: 'chrome',
       use: { ...devices['Desktop Chrome'] },
       // fullyParallel: true 
     },

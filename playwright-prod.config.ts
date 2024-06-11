@@ -12,7 +12,7 @@ export default defineConfig<TestOptions>({
 
     projects: [
         {
-            name: 'chromium',
+            name: 'chrome',
         }
     ],
 });
