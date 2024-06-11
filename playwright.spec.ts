@@ -17,18 +17,18 @@ export default defineConfig<TestOptions>({
     timeout: 2000,
     toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
   },
-  testDir: './tests',
-  /* Run tests in files in parallel */
-  fullyParallel: false,
+  // testDir: './tests',
+  // /* Run tests in files in parallel */
+  // fullyParallel: false,
 
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,            //--> make 1 retries ***
+  // /* Fail the build on CI if you accidentally left test.only in the source code. */
+  // forbidOnly: !!process.env.CI,
+  // /* Retry on CI only */
+  // retries: process.env.CI ? 2 : 1,            //--> make 1 retries ***
 
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  // workers: process.env.CI ? 1 : 5,          //--->this will run 5 workers, not 4 *** 
+  // /* Opt out of parallel tests on CI. */
+  // workers: process.env.CI ? 1 : undefined,
+  // // workers: process.env.CI ? 1 : 5,          //--->this will run 5 workers, not 4 *** 
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // reporter: 'html',
@@ -56,12 +56,12 @@ export default defineConfig<TestOptions>({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    // actionTimeout: 20000,
-    // navigationTimeout: 25000,
-    // video: {                //---> to take video as a screenshot of the tests ***
-    //   mode: 'off',
-    //   size: { width: 1920, height: 1080 }
-    // }
+    actionTimeout: 20000,
+    navigationTimeout: 25000,
+    video: {                //---> to take video as a screenshot of the tests ***
+      mode: 'off',
+      size: { width: 1920, height: 1080 }
+    }
   },
 
   /* Configure projects for major browsers */
@@ -82,16 +82,10 @@ export default defineConfig<TestOptions>({
     },
     {
       name: 'chrome',
-      use: { ...devices['Desktop Chrome'] },
-      // fullyParallel: true 
     },
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
     },
     {
       name: 'mobile',                       //---> test for mobile devices ***
@@ -100,32 +94,6 @@ export default defineConfig<TestOptions>({
         ...devices['iPhone 13 Pro']
       }
     }
-    // {
-    //   name: 'mobile',                       //---> test through viewport for mobile devices ***
-    //   testMatch: 'testMobile.spec.ts',
-    //   use: {
-    //     viewport: { width: 414, height: 800 }
-    //   }
-    // }
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
 
   /* Run your local dev server before starting the tests */
