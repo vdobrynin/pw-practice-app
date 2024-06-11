@@ -46,13 +46,13 @@ export default defineConfig<TestOptions>({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',              // ---> default url ***
-    baseURL: 'http://localhost:4200/',
+    // baseURL: 'http://localhost:4200/',
 
     globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
 
-    // baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
-    //   : process.env.STAGING === '1' ? 'http://localhost:4202/'
-    //     : 'http://localhost:4200/',
+    baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
+      : process.env.STAGING === '1' ? 'http://localhost:4202/'
+        : 'http://localhost:4200/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
