@@ -48,9 +48,9 @@ test.describe('Form Layouts page @block', () => {
         await usingTheGridForm.getByRole('radio', { name: "Option 2" }).check({ force: true })
 
         const radioStatus = await usingTheGridForm.getByRole('radio', { name: "Option 1" }).isChecked()
-        // expect(radioStatus).toBeTruthy()
-        // await expect(usingTheGridForm.getByRole('radio', { name: "Option 1" })).toBeChecked()
-        await expect(usingTheGridForm).toHaveScreenshot()
+        expect(radioStatus).toBeTruthy()
+        await expect(usingTheGridForm.getByRole('radio', { name: "Option 1" })).toBeChecked()
+        // await expect(usingTheGridForm).toHaveScreenshot()
         // await expect(usingTheGridForm).toHaveScreenshot({ maxDiffPixels: 250 }) //test will not fail setup it if test not stable
 
         // await usingTheGridForm.getByRole('radio', { name: "Option 2" }).check({ force: true })
