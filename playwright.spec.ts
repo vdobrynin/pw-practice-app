@@ -134,9 +134,14 @@ export default defineConfig<TestOptions>({
   //   url: 'http://127.0.0.1:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
-  webServer: {                //--->setup for docker
-    timeout: 2 * 60 * 1000,
+  webServer: {                //--->setup for github actions
     command: 'npm run start',
-    url: 'http://localhost:4200/'
+    url: 'http://localhost:4200/',
+    timeout: 120 * 1000,
   }
+  // webServer: {                //--->setup for docker
+  //   timeout: 2 * 60 * 1000,
+  //   command: 'npm run start',
+  //   url: 'http://localhost:4200/'
+  // }
 });
