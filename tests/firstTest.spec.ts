@@ -59,14 +59,14 @@ test('locating child elements', async ({ page }) => {
 test('location parent element', async ({ page }) => {               // nb-card <-- uniq locator
     await page.locator('nb-card', { hasText: "Using the Grid" })
         .getByRole('textbox', { name: "Email" }).click()            // with text
-    
+
     await page.locator('nb-card', { has: page.locator('#inputEmail1') })
         .getByRole('textbox', { name: "Email" }).click()            // with email
 
     await page.locator('nb-card')
         .filter({ hasText: "Basic form" })
         .getByRole('textbox', { name: "Email" }).click()            // with filter
-    
+
     await page.locator('nb-card')
         .filter({ has: page.locator('.status-danger') })
         .getByRole('textbox', { name: "Password" }).click()         // choose color & password
@@ -104,26 +104,28 @@ test('reusing the locators', async ({ page }) => {
         .toHaveValue('Welcome123') // --> assertion for password
 })
 
-// test('extracting values', async ({ page }) => {
-//     //single text value
-//     const basicForm = page.locator('nb-card').filter({ hasText: "Basic form" })
-//     const buttonText = await basicForm.locator('button').textContent()
+test('extracting values', async ({ page }) => {
+    //--> single text value
+    const basicForm = page.locator('nb-card')
+        .filter({ hasText: "Basic form" })
+    const buttonText = await basicForm
+        .locator('button').textContent()
+    expect(buttonText).toEqual('Submit')    // assertion
 
-//     expect(buttonText).toEqual('Submit')
+    // --> all text values
+    const allRadioButtonsLabels = await page.locator('nb-radio')
+        .allTextContents()
+    expect(allRadioButtonsLabels).toContain("Option 1")
 
-//     //all text values
-//     const allRadioButtonsLabels = await page.locator('nb-radio').allTextContents()
-//     expect(allRadioButtonsLabels).toContain("Option 1")
+        // --> input value
+        const emailField = basicForm.getByRole('textbox', { name: "Email" })
+        await emailField.fill('test@test.com')
+        const emailValue = await emailField.inputValue()
+        expect(emailValue).toEqual('test@test.com')
 
-//     //input value
-//     const emailField = basicForm.getByRole('textbox', { name: "Email" })
-//     await emailField.fill('test@test.com')
-//     const emailValue = await emailField.inputValue()
-//     expect(emailValue).toEqual('test@test.com')
-
-//     const placeholderValue = await emailField.getAttribute('placeholder')
-//     expect(placeholderValue).toEqual('Email')
-// })
+        const placeholderValue = await emailField.getAttribute('placeholder')
+        expect(placeholderValue).toEqual('Email')
+})
 
 // test('assertions', async ({ page }) => {
 //     const basicFormButton = page.locator('nb-card').filter({ hasText: "Basic form" }).locator('button')
