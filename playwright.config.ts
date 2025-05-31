@@ -1,19 +1,18 @@
 import { defineConfig, devices } from '@playwright/test';
 import type { TestOptions } from './test-options';
 
-
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-require('dotenv').config();  //---> for .env  
+// require('dotenv').config();  //---> for .env  
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig<TestOptions>({
   timeout: 50000,
-  // globalTimeout: 120000,
+  globalTimeout: 120000,
   expect: {
     timeout: 2000,
     toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
@@ -36,34 +35,34 @@ export default defineConfig<TestOptions>({
   // reporter: 'list',                        //---> below different type of reporters ***
   // reporter: 'json',
   // reporter: [['json', { outputFile: 'test-results/jsonReport.json' }]],
-  reporter: [
-    // Use "dot" reporter on CI, "list" otherwise (Playwright default).
-    process.env.CI ? ["dot"] : ["list"],
-    // Add Argos reporter.
-    ["@argos-ci/playwright/reporter",
-      { // Upload to Argos on CI only.
-        uploadToArgos: !!process.env.CI,
-        // Set your Argos token (required if not using GitHub Actions).
-        token: "cdac4fb8086461e51b437007afb9062c6a1b02bf",
-      },
-    ],
-    ['json', { outputFile: 'test-results/jsonReport.json' }],
-    ['junit', { outputFile: 'test-results/junitReport.xml' }],
-    //   ['allure-playwright']
-    ['html']
-  ],
+  // reporter: [
+  //   // Use "dot" reporter on CI, "list" otherwise (Playwright default).
+  //   process.env.CI ? ["dot"] : ["list"],
+  //   // Add Argos reporter.
+  //   ["@argos-ci/playwright/reporter",
+  //     { // Upload to Argos on CI only.
+  //       uploadToArgos: !!process.env.CI,
+  //       // Set your Argos token (required if not using GitHub Actions).
+  //       token: "cdac4fb8086461e51b437007afb9062c6a1b02bf",
+  //     },
+  //   ],
+  //   ['json', { outputFile: 'test-results/jsonReport.json' }],
+  //   ['junit', { outputFile: 'test-results/junitReport.xml' }],
+  //   //   ['allure-playwright']
+  //   ['html']
+  // ],
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',              // ---> default url ***
-    // baseURL: 'http://localhost:4200/',
+    baseURL: 'http://localhost:4200/',
 
-    globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
+    // globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
 
-    baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
-      : process.env.STAGING === '1' ? 'http://localhost:4202/'
-        : 'http://localhost:4200/',
+    // baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
+    //   : process.env.STAGING === '1' ? 'http://localhost:4202/'
+    //     : 'http://localhost:4200/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -72,26 +71,26 @@ export default defineConfig<TestOptions>({
     navigationTimeout: 25000,
     video: {                //---> to take video as a screenshot of the tests ***
       mode: 'off',
-      size: { width: 1920, height: 1080 }
+      size: { width: 1920, height: 1200 }
     }
   },
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'dev',
-      use: {
-        ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:4201/'
-      },
-    },
-    {
-      name: 'staging',
-      use: {
-        ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:4202/'
-      },
-    },
+    // {
+    //   name: 'dev',
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     baseURL: 'http://localhost:4201/'
+    //   },
+    // },
+    // {
+    //   name: 'staging',
+    //   use: {
+    //     ...devices['Desktop Chrome'],
+    //     baseURL: 'http://localhost:4202/'
+    //   },
+    // },
     {
       name: 'chrome',
       use: { ...devices['Desktop Chrome'] },
@@ -108,9 +107,7 @@ export default defineConfig<TestOptions>({
     {
       name: 'mobile',                       //---> test for mobile devices ***
       testMatch: 'testMobile.spec.ts',
-      use: {
-        ...devices['iPhone 13 Pro']
-      }
+      use: {...devices['iPhone 13 Pro']}
     }
     // {
     //   name: 'mobile',                       //---> test through viewport for mobile devices ***

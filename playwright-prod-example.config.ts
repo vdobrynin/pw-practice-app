@@ -23,7 +23,7 @@ export default defineConfig<TestOptions>({
         navigationTimeout: 25000,
         video: {
             mode: 'off',
-            size: { width: 1920, height: 1080 }
+            size: { width: 1920, height: 1200 }
         }
     },
 
@@ -45,7 +45,7 @@ export default defineConfig<TestOptions>({
                 browserName: 'firefox',
                 video: {           //---> example to take video overwrite global only with firefox   
                     mode: 'on',
-                    size: { width: 1920, height: 1080 }
+                    size: { width: 1920, height: 1200 }
                 }
             }
         },
@@ -53,7 +53,7 @@ export default defineConfig<TestOptions>({
             name: 'pageObjectFullScreen',
             testMatch: 'usePageObjects.spec.ts',
             use: {
-                viewport: { width: 1920, height: 1080 }
+                viewport: { width: 1920, height: 1200 }
             }
         },
     ],
