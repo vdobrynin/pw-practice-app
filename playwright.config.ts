@@ -10,23 +10,24 @@ import type { TestOptions } from './test-options';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig<TestOptions>({
-  timeout: 50000,
-  globalTimeout: 120000,
-  expect: {
-    timeout: 2000,
-    toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
-  },
-  // testDir: './tests',
-  // /* Run tests in files in parallel */
-  // fullyParallel: false,
+export default defineConfig({
+// export default defineConfig<TestOptions>({
+  // timeout: 10000,
+  // globalTimeout: 120000,
+  // expect: {
+  //   timeout: 2000,
+  //   toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
+  // },
+  testDir: './tests',
+  /* Run tests in files in parallel */
+  fullyParallel: false,
 
-  // /* Fail the build on CI if you accidentally left test.only in the source code. */
-  // forbidOnly: !!process.env.CI,
-  // /* Retry on CI only */
-  // retries: process.env.CI ? 2 : 1,            //--> make 1 retries ***
+  // * Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 1,            //--> make 1 retries ***
 
-  // /* Opt out of parallel tests on CI. */
+  /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : undefined,
   // // workers: process.env.CI ? 1 : 5,          //--->this will run 5 workers, not 4 *** 
 
@@ -66,13 +67,13 @@ export default defineConfig<TestOptions>({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    screenshot: "only-on-failure",           //---> Capture screenshot after each test failure.
-    actionTimeout: 20000,
-    navigationTimeout: 25000,
-    video: {                //---> to take video as a screenshot of the tests ***
-      mode: 'off',
-      size: { width: 1920, height: 1200 }
-    }
+    // screenshot: "only-on-failure",           //---> Capture screenshot after each test failure.
+    // actionTimeout: 30000,
+    // navigationTimeout: 25000,
+    // video: {                //---> to take video as a screenshot of the tests ***
+    //   mode: 'off',
+    //   size: { width: 1920, height: 1200 }
+    // }
   },
 
   /* Configure projects for major browsers */
