@@ -11,21 +11,21 @@ import type { TestOptions } from './test-options';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-// export default defineConfig<TestOptions>({
-  // timeout: 10000,
-  // globalTimeout: 120000,
-  // expect: {
-  //   timeout: 2000,
-  //   toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
-  // },
+  // export default defineConfig<TestOptions>({
+  // timeout: 30000,
+  // globalTimeout: 120000,    // --> not recommend at all (default no timeout)
+  expect: {
+    timeout: 2000,                        // override +2 sec
+    toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
+  },
   testDir: './tests',
-  /* Run tests in files in parallel */
-  fullyParallel: false,
+  // /* Run tests in files in parallel */
+  // fullyParallel: false,
 
-  // * Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,            //--> make 1 retries ***
+  // // * Fail the build on CI if you accidentally left test.only in the source code. */
+  // forbidOnly: !!process.env.CI,
+  // /* Retry on CI only */
+  // retries: process.env.CI ? 2 : 1,            //--> make 1 retries ***
 
   /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : undefined,
@@ -68,8 +68,8 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     // screenshot: "only-on-failure",           //---> Capture screenshot after each test failure.
-    // actionTimeout: 30000,
-    // navigationTimeout: 25000,
+    // actionTimeout: 5000,
+    navigationTimeout: 5000,
     // video: {                //---> to take video as a screenshot of the tests ***
     //   mode: 'off',
     //   size: { width: 1920, height: 1200 }
@@ -108,7 +108,7 @@ export default defineConfig({
     {
       name: 'mobile',                       //---> test for mobile devices ***
       testMatch: 'testMobile.spec.ts',
-      use: {...devices['iPhone 13 Pro']}
+      use: { ...devices['iPhone 13 Pro'] }
     }
     // {
     //   name: 'mobile',                       //---> test through viewport for mobile devices ***
@@ -144,9 +144,9 @@ export default defineConfig({
   //   url: 'http://127.0.0.1:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
-  webServer: {                //--->setup for docker
-    timeout: 2 * 60 * 1000,
-    command: 'npm run start',
-    url: 'http://localhost:4200/'
-  }
+  // webServer: {                //--->setup for docker
+  //   timeout: 2 * 60 * 1000,
+  //   command: 'npm run start',
+  //   url: 'http://localhost:4200/'
+  // }
 });
