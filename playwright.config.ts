@@ -12,8 +12,8 @@ import type { TestOptions } from './test-options';
  */
 export default defineConfig({
   // export default defineConfig<TestOptions>({
-  // timeout: 30000,
-  // globalTimeout: 120000,    // --> not recommend at all (default no timeout)
+  // timeout: 30000,          // --> same as default
+  // globalTimeout: 120000,   // --> not recommend at all (default no timeout)
   expect: {
     timeout: 2000,                        // override +2 sec
     toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable

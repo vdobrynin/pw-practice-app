@@ -1,15 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 // test.describe.configure({ mode: 'parallel' }) // ---> to run in parallel only this file
-
 test.beforeEach(async ({ page }) => {
     await page.goto('/')                //---> after setup env var url at config
 })
 
-test.describe('Form Layouts page @block', () => {
-
+test.describe('Form Layouts page', () => {
     // test.describe.configure({ retries: 2 })    //---> retries to testing this tests TWICE
-    test.describe.configure({ retries: 0 })
+    // test.describe.configure({ retries: 0 })
     // test.describe.configure({ mode: 'serial' })//--> if input test fails, then radio buttons will executed  
 
     test.beforeEach(async ({ page }) => {
@@ -17,20 +15,20 @@ test.describe('Form Layouts page @block', () => {
         await page.getByText('Form Layouts').click()
     })
 
-    test('input fields', async ({ page }, testInfo) => {
-
-        if (testInfo.retry) {                      // ---> example before next retry cleanup Data Base
-            // do something
-        }
-        const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" }).getByRole('textbox', { name: "Email" })
-
+    test('input fields', async ({ page }, testInfo) => {    // #33
+        // if (testInfo.retry) {                      // ---> example before next retry cleanup Data Base
+        //     // do something
+        // }
+        const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" })
+            .getByRole('textbox', { name: "Email" })
         await usingTheGridEmailInput.fill('test@test.com')
         await usingTheGridEmailInput.clear()
         await usingTheGridEmailInput.pressSequentially('test2@test.com')
-        // await usingTheGridEmailInput.type('test2@test.com', { delay: 500 })
+        // await usingTheGridEmailInput.pressSequentially('test2@test.com', { delay: 200 })
+        // await usingTheGridEmailInput.type('test2@test.com') // deprecated
 
         //generic assertion
-        const inputValue = await usingTheGridEmailInput.inputValue()
+        const inputValue = await usingTheGridEmailInput.inputValue() 
         expect(inputValue).toEqual('test2@test.com')
         // expect(inputValue).toEqual('test2@test.com1')       // for test retry example for test to fail
 
@@ -39,7 +37,7 @@ test.describe('Form Layouts page @block', () => {
         await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')
     })
 
-    test.only('radio buttons', async ({ page }) => {
+    test('radio buttons', async ({ page }) => {
 
         await page.waitForTimeout(300)
         const usingTheGridForm = page.locator('nb-card', { hasText: "Using the Grid" })
