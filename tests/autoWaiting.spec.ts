@@ -17,26 +17,29 @@ test('auto waiting', async ({ page }) => {
     const text = await successButton.allTextContents()
     expect(text).toContain('Data loaded with AJAX get request.') // with diff assertion
 
-    await expect(successButton)
+    await expect(successButton).toH
         .toHaveText('Data loaded with AJAX get request.', { timeout: 20000 })//--> overwriting to 20 sec
 })
 
-// test('alternative waits', async ({ page }) => {
+test('alternative waits', async ({ page }) => {
+    //    //test.slow()
+    const successButton = page.locator('.bg-success')
 
-//     test.slow()
-//     const successButton = page.locator('.bg-success')
-//     // #1 wait for element
-//     await page.waitForSelector('.bg-success')
+    // // #1 wait for element
+    // await page.waitForSelector('.bg-success')
+    // await successButton.click()
 
-//     // #2 wait for particular response
-//     // await page.waitForResponse('https://uitestingplayground.com/ajax', { timeout: 30000 })
+    // // #2 wait for particular response
+    // await page.waitForResponse('http://uitestingplayground.com/ajaxdata')
+    // await successButton.click()
 
-//     // #3 wait for network calls to be completed ('NOT RECOMMENDED')
-//     // await page.waitForLoadState('networkidle')
+    // #3 wait for network calls to be completed ('NOT RECOMMENDED')
+    await page.waitForLoadState('networkidle')
+    await successButton.click()
 
-//     const text = await successButton.textContent()
-//     expect(text).toEqual('Data loaded with AJAX get request.')
-// })
+    const text = await successButton.allTextContents()
+    expect(text).toContain('Data loaded with AJAX get request.')
+})
 
 // test('timeouts', async ({ page }) => {
 //     // test.setTimeout(10000)
