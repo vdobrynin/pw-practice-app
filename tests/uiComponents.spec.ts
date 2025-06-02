@@ -28,7 +28,7 @@ test.describe('Form Layouts page', () => {
         // await usingTheGridEmailInput.type('test2@test.com') // deprecated
 
         //generic assertion
-        const inputValue = await usingTheGridEmailInput.inputValue() 
+        const inputValue = await usingTheGridEmailInput.inputValue()
         expect(inputValue).toEqual('test2@test.com')
         // expect(inputValue).toEqual('test2@test.com1')       // for test retry example for test to fail
 
@@ -52,7 +52,7 @@ test.describe('Form Layouts page', () => {
             .toBeTruthy()
         await expect(usingTheGridForm.getByRole('radio', { name: "Option 1" }))
             .toBeChecked()
-        
+
         // await expect(usingTheGridForm).toHaveScreenshot()
         // await expect(usingTheGridForm).toHaveScreenshot({ maxDiffPixels: 250 }) //test will not fail setup it if test not stable
 
@@ -91,17 +91,17 @@ test('checkboxes', async ({ page }) => {
 })
 
 test('lists and dropouts', async ({ page }) => {
-
     const dropDownMenu = page.locator('ngx-header nb-select')
     await dropDownMenu.click()
 
-    page.getByRole('list')      // when the list has UL tag
-    page.getByRole('listitem')  // when the list has LI tag
+    page.getByRole('list')   // when the list has --> UL tag --> we using this cause it's on the page
+    // page.getByRole('listitem')  // when the list has --> LI tag
 
     // const optionList = page.getByRole('list').locator('nb-option')
     const optionList = page.locator('nb-option-list nb-option')     // ---> teacher prefer !!!
     await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"]) // --> check to all
     await optionList.filter({ hasText: "Cosmic" }).click()  // --> cosmic only
+    // await optionList.filter({ hasText: "Dark" }).click()  // --> dark only
 
     const header = page.locator('nb-layout-header')         // --> check the header color
     await expect(header).toHaveCSS('background-color', 'rgb(50, 50, 89)')
