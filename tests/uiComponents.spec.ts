@@ -244,27 +244,30 @@ test('datepicker', async ({ page }) => {                  // --> datepicker
 })
 
 test('sliders', async ({ page }) => {
-    //                                   // update attribute
+    //                                   // #1 --> update attribute
     const tempGauge = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger circle')
     await tempGauge.evaluate(node => {
         node.setAttribute('cx', '232.630')
         node.setAttribute('cy', '232.630')
     })
     await tempGauge.click()
-
-    //                                    // mouse over
+    //                                    // #2 --> mouse movement drag
     const tempBox = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger')
     await tempBox.scrollIntoViewIfNeeded()
 
     const box = await tempBox.boundingBox()
-    const x = box.x + box.width / 2         // start of the centre of square
-    const y = box.y + box.height / 2
-    await page.mouse.move(x, y)                     // start moving the mouse
-    await page.mouse.down()                 // click mouse to start movement
-    await page.mouse.move(x + 100, y)                    // make a move to the left
+    const x = box.x + box.width / 2             // start of the centre of square
+    const y = box.y + box.height / 2            // same as above
+    await page.mouse.move(x, y)             // start moving the mouse in centre
+    await page.mouse.down()                 // --> click mouse to start movement
+    await page.mouse.move(x + 100, y)                    // make a move to the right
     await page.mouse.move(x + 100, y + 100)              // continue
-    // await page.mouse.move(x - 100, y)               // make a move to the right
-    // await page.mouse.move(x - 100, y + 100)         // continue
-    await page.mouse.up()                   // finish
-    await expect(tempBox).toContainText('30')
+    await expect(tempBox).toContainText('30')   // --> finish 1st move
+             
+    await page.mouse.up()
+    await page.mouse.move(x, y)             // start moving the mouse in centre
+    await page.mouse.down()                 // --> click mouse to start movement
+    await page.mouse.move(x - 100, y)               // make a move to the left
+    await page.mouse.move(x - 100, y + 105)         // --> finish 2nd move                 
+    await expect(tempBox).toContainText('12')
 })
