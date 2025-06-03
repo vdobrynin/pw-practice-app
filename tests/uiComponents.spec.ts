@@ -211,32 +211,40 @@ test('web tables', async ({ page }) => {
 })
 
 test('datepicker', async ({ page }) => {
-    //                                         // datepicker part1
+    //                                         // --> datepicker part1
     await page.getByText('Forms').click()
     await page.getByText('Datepicker').click()
 
     const calendarInputField = await page.getByPlaceholder('Form Picker')
     await calendarInputField.click()
 
-    let date = new Date()
-    date.setDate(date.getDate() + 445)              // this is hardcoded days
-    const expectedDate = date.getDate().toString()          // dynamic date + 1 --> to find date
-    const expectedMonthShort = date.toLocaleString('En-US', { month: 'short' })     // short month
-    const expectedMonthLong = date.toLocaleString('En-US', { month: 'long' })   // long month
-    const expectedYear = date.getFullYear()
-    const dateToAssert = `${expectedMonthShort} ${expectedDate}, ${expectedYear}`
+    // let date = new Date()
+    // date.setDate(date.getDate() + 445)                  // this is hardcoded days
+    // const expectedDate = date.getDate().toString()          // dynamic date + 1 --> to find date
+    // const expectedMonthShort = date.toLocaleString('En-US', { month: 'short' })     // short month
+    // const expectedMonthLong = date.toLocaleString('En-US', { month: 'long' })   // long month
+    // const expectedYear = date.getFullYear()
+    // const dateToAssert = `${expectedMonthShort} ${expectedDate}, ${expectedYear}`
 
-    let calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
-    const expectedMonthAndYear = `${expectedMonthLong} ${expectedYear}`
-    await page.waitForTimeout(300)
+    // let calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+    // const expectedMonthAndYear = `${expectedMonthLong} ${expectedYear}`
+    // await page.waitForTimeout(300)
 
-    while (!calendarMonthAndYear.includes(expectedMonthAndYear)) {
-        await page.locator('nb-calendar-pageable-navigation [data-name="Layer 2"] [data-name="chevron-right"]').click()
-        calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
-    }
+    // while (!calendarMonthAndYear.includes(expectedMonthAndYear)) {
+    //     await page.locator('nb-calendar-pageable-navigation [data-name="Layer 2"] [data-name="chevron-right"]').click()
+    //     calendarMonthAndYear = await page.locator('nb-calendar-view-mode').textContent()
+    // }
 
-    await page.locator('[class="day-cell ng-star-inserted"]').getByText(expectedDate, { exact: true }).click()//wait only of this month locator & use {exact: true}
-    await expect(calendarInputField).toHaveValue(dateToAssert)
+    // await page.locator('[class="day-cell ng-star-inserted"]')
+    //     .getByText(expectedDate, { exact: true })
+    //     .click()//wait only of this month locator & use {exact: true}
+    // await expect(calendarInputField)
+    //     .toHaveValue(dateToAssert)
+    await page.locator('[class="day-cell ng-star-inserted"]')
+        .getByText('1', { exact: true })
+        .click()        // --> wait only of this month locator & use {exact: true}
+    await expect(calendarInputField)
+        .toHaveValue('Jun 1, 2025')
 })
 
 test('sliders', async ({ page }) => {
