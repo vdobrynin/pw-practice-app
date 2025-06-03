@@ -251,7 +251,7 @@ test('sliders', async ({ page }) => {
         node.setAttribute('cy', '232.630')
     })
     await tempGauge.click()
-    //                                    // #2 --> mouse movement drag
+    //                                    // #2 --> mouse movement (dragging the mouse)
     const tempBox = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger')
     await tempBox.scrollIntoViewIfNeeded()
 
