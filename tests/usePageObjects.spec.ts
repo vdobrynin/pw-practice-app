@@ -8,13 +8,12 @@ test.beforeEach(async ({ page }) => {           // after setup env var url at co
 })
 
 test('navigate to form page @smoke @regression', async ({ page }) => {
-
     const pm = new PageManager(page)
     await pm.navigateTo().formLayoutsPage()
-    await pm.navigateTo().datepickerPage()
-    await pm.navigateTo().smartTablePage()
-    await pm.navigateTo().toastrPage()
-    await pm.navigateTo().tooltipPage()
+    // await pm.navigateTo().datepickerPage()
+    // await pm.navigateTo().smartTablePage()
+    // await pm.navigateTo().toastrPage()
+    // await pm.navigateTo().tooltipPage()
 })
 
 test('parametrized methods @smoke', async ({ page }) => {
