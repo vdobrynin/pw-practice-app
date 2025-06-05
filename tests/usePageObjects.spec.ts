@@ -29,8 +29,8 @@ test('parametrized methods @smoke', async ({ page }) => {
     // const buffer = await page.screenshot()   //---> save in binary 
     // console.log(buffer.toString('base64'))
     await pm.onFormLayoutsPage()
-        .submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)
-    // await page.locator('nb-card', { hasText: "Inline form" })
+        .submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)//with true check box on, w/false empty
+    // // await page.locator('nb-card', { hasText: "Inline form" })
     //     .screenshot({ path: 'screenshots/inlineForm.png' })//--->screenshot for test specific area
 
     // await pm.navigateTo().datepickerPage()
