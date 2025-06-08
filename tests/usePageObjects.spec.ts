@@ -23,19 +23,17 @@ test('parametrized methods @smoke', async ({ page }) => {
     const randomEmail = `${randomFullName.replace(/\s+/g, '')}${faker.number.int(1000)}@test.com`
 
     await pm.navigateTo().formLayoutsPage()
-    await pm.onFormLayoutsPage()
-        .submitUsingTheGridFormWithCredentialsAndSelectedOption(process.env.USERNAME, process.env.PASSWORD, 'Option 2')
+    await pm.onFormLayoutsPage().submitUsingTheGridFormWithCredentialsAndSelectedOption(process.env.USERNAME, process.env.PASSWORD, 'Option 1')
     // await page.screenshot({ path: 'screenshots/formsLayoutsPage.png' })//--->screenshot for test
-    // const buffer = await page.screenshot()   //---> save in binary 
+    // const buffer = await page.screenshot()   //---> save in binary
     // console.log(buffer.toString('base64'))
-    await pm.onFormLayoutsPage()
-        .submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)//with true check box on, w/false empty
-    // // await page.locator('nb-card', { hasText: "Inline form" })
+    await pm.onFormLayoutsPage().submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)//with true check box on, w/false empty
+    // await page.locator('nb-card', { hasText: "Inline form" })
     //     .screenshot({ path: 'screenshots/inlineForm.png' })//--->screenshot for test specific area
 
-    // await pm.navigateTo().datepickerPage()
-    // await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(10)
-    // await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(6, 15)
+    await pm.navigateTo().datepickerPage()
+    await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(7)
+    await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(3, 12)
 })
 
 test('testing with argos ci', async ({ page }) => {

@@ -5,7 +5,7 @@ import type { TestOptions } from './test-options';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config();  //---> for .env  
+require('dotenv').config();  //---> for .env  
 
 /**
  * See https://playwright.dev/docs/test-configuration.

@@ -2,10 +2,8 @@ import { Page } from "playwright/test";
 import { HelperBase } from "./helperBase"
 
 export class FormLayoutsPage extends HelperBase {
-    // private readonly page: Page
     constructor(page: Page) {
         super(page)
-        // this.page = page
     }
 
     async submitUsingTheGridFormWithCredentialsAndSelectedOption(email: string, password: string, optionText: string) {
