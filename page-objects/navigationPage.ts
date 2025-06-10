@@ -3,12 +3,13 @@ import { HelperBase } from "./helperBase"
 
 export class NavigationPage extends HelperBase {
     constructor(page: Page) {
-            super(page)
+            super(page)         // #52
     }
 
     async formLayoutsPage() {
         await this.selectGroupMenuItem('Forms')
         await this.page.getByText('Form Layouts').click()
+        // await this.waitForNumberOfSeconds(2)             // #52 delay to navigate example from helper base page
     }
 
     async datepickerPage() {
