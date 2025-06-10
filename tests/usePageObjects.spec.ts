@@ -18,8 +18,7 @@ test('navigate to form page @smoke @regression', async ({ page }) => {
 
 test('parametrized methods @smoke', async ({ page }) => {
     const pm = new PageManager(page)
-    const randomFullName = faker.person.fullName()
-    //                                        //--> will replace all spaces that found in text: (/\s+/g, '')
+    const randomFullName = faker.person.fullName() //--> will replace all spaces that found in text: (/\s+/g, '')                                 
     const randomEmail = `${randomFullName.replace(/\s+/g, '')}${faker.number.int(1000)}@test.com`
 
     await pm.navigateTo().formLayoutsPage()
