@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 test.describe.only('Form Layouts page', () => {
-    //test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
+    test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
     // test.describe.configure({ mode: 'serial' })//--> if input test fails, then radio buttons will executed  
 
     test.beforeEach(async ({ page }) => {
@@ -28,8 +28,8 @@ test.describe.only('Form Layouts page', () => {
 
         //generic assertion
         const inputValue = await usingTheGridEmailInput.inputValue()
-        expect(inputValue).toEqual('test2@test.com1')
-        // expect(inputValue).toEqual('test2@test.com1')       // for test retry example for test to fail
+        expect(inputValue).toEqual('test2@test.com')
+        // expect(inputValue).toEqual('test2@test.com1')     // #64 for test retry -->#64<-- example for test to fail
 
         //locator assertion
         expect(inputValue).toEqual('test2@test.com')
