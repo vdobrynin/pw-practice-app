@@ -5,9 +5,8 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/')                //---> after setup env var url at config
 })
 
-test.describe('Form Layouts page', () => {
-    // test.describe.configure({ retries: 2 })    //---> retries to testing this tests TWICE
-    // test.describe.configure({ retries: 0 })
+test.describe.only('Form Layouts page', () => {
+    //test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
     // test.describe.configure({ mode: 'serial' })//--> if input test fails, then radio buttons will executed  
 
     test.beforeEach(async ({ page }) => {
@@ -15,8 +14,8 @@ test.describe('Form Layouts page', () => {
         await page.getByText('Form Layouts').click()
     })
 
-    test('input fields', async ({ page }, testInfo) => {    // #33
-        // if (testInfo.retry) {                      // ---> example before next retry cleanup Data Base
+    test('input fields', async ({ page }, testInfo) => {    // #33 // --> at #64 add testInfo
+        // if (testInfo.retry) {                // #64 ---> example before next retry to cleanup Data Base (pre-conditions)
         //     // do something
         // }
         const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" })
@@ -29,7 +28,7 @@ test.describe('Form Layouts page', () => {
 
         //generic assertion
         const inputValue = await usingTheGridEmailInput.inputValue()
-        expect(inputValue).toEqual('test2@test.com')
+        expect(inputValue).toEqual('test2@test.com1')
         // expect(inputValue).toEqual('test2@test.com1')       // for test retry example for test to fail
 
         //locator assertion

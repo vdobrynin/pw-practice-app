@@ -19,20 +19,18 @@ export default defineConfig({
     toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
   },
   testDir: './tests',
-  // /* Run tests in files in parallel */
-  // fullyParallel: false,
-
-  // // * Fail the build on CI if you accidentally left test.only in the source code. */
-  // forbidOnly: !!process.env.CI,
-  // /* Retry on CI only */
-  // retries: process.env.CI ? 2 : 1,            //--> make 1 retries ***
-
+  /* Run tests in files in parallel */
+  fullyParallel: false,                 // have temporary for retry's
+  // fullyParallel: true,             // --> this is default <---
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 1,           //--> from 0 change to 1 to make retries for local computer ***
   /* Opt out of parallel tests on CI. */
-  // workers: process.env.CI ? 1 : undefined,
-  // // workers: process.env.CI ? 1 : 5,          //--->this will run 5 workers, not 4 *** 
-
+  workers: process.env.CI ? 1 : undefined,
+  // workers: process.env.CI ? 1 : 5,          //---> this will run 5 workers, not 4 *** 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  // reporter: 'html',
+  reporter: 'html',
   // reporter: 'list',                        //---> below different type of reporters ***
   // reporter: 'json',
   // reporter: [['json', { outputFile: 'test-results/jsonReport.json' }]],
