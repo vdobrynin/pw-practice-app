@@ -2,12 +2,12 @@ import { test, expect } from '@playwright/test';
 
 // test.describe.configure({ mode: 'parallel' }) // ---> to run in parallel only this file
 test.beforeEach(async ({ page }) => {
-    await page.goto('/')                //---> after setup env var url at config
+    await page.goto('/')                // --> after setup env var url at config
 })
 
-test.describe.only('Form Layouts page', () => {
+test.describe('Form Layouts page', () => {
     test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
-    // test.describe.configure({ mode: 'serial' })//--> if input test fails, then radio buttons will executed  
+    // test.describe.configure({ mode: 'serial' })// #65--> input field & radio buttons will executed 1 by 1, the rest in parallel 
 
     test.beforeEach(async ({ page }) => {
         await page.getByText('Forms').click()
@@ -15,7 +15,7 @@ test.describe.only('Form Layouts page', () => {
     })
 
     test('input fields', async ({ page }, testInfo) => {    // #33 // --> at #64 add testInfo
-        // if (testInfo.retry) {                // #64 ---> example before next retry to cleanup Data Base (pre-conditions)
+        // if (testInfo.retry) {                // #64 --> example before next retry to cleanup Data Base (pre-conditions)
         //     // do something
         // }
         const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" })
@@ -23,7 +23,7 @@ test.describe.only('Form Layouts page', () => {
         await usingTheGridEmailInput.fill('test@test.com')
         await usingTheGridEmailInput.clear()
         await usingTheGridEmailInput.pressSequentially('test2@test.com')
-        // await usingTheGridEmailInput.pressSequentially('test2@test.com', { delay: 200 })
+        // await usingTheGridEmailInput.pressSequentially('test2@test.com', { delay: 200 }) //#65 remove for being delay
         // await usingTheGridEmailInput.type('test2@test.com') // deprecated
 
         //generic assertion

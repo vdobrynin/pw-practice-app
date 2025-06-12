@@ -20,15 +20,15 @@ export default defineConfig({
   },
   testDir: './tests',
   /* Run tests in files in parallel */
-  fullyParallel: false,                 // have temporary for retry's
-  // fullyParallel: true,             // --> this is default <---
+  // fullyParallel: true,             // --> this is faster cause parallel *** default *** <---
+  fullyParallel: false,                 // --> have temporary for retry's OR parallel
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 1,           //--> from 0 change to 1 to make retries for local computer ***
+  retries: process.env.CI ? 2 : 1,        // --> from 0 change to 1 to make retries for local computer ***
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  // workers: process.env.CI ? 1 : 5,          //---> this will run 5 workers, not 4 *** 
+  workers: process.env.CI ? 1 : undefined, // #65 should be run 5 but running 4 *** default *** fastest!!!
+  // workers: process.env.CI ? 1 : 5,         // #65 --> this will run 5 workers, not 4 *** 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   // reporter: 'list',                        //---> below different type of reporters ***

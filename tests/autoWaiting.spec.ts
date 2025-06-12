@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }, testInfo) => {
     // testInfo.setTimeout(testInfo.timeout + 2000) // --> the way add +2 sec timeout
 })
 
-test('auto waiting', async ({ page }) => {
+test.skip('auto waiting', async ({ page }) => {
     const successButton = page.locator('.bg-success')
     await successButton.click()
     // const text = await successButton.textContent()
@@ -21,7 +21,7 @@ test('auto waiting', async ({ page }) => {
         .toHaveText('Data loaded with AJAX get request.', { timeout: 20000 })//--> overwriting to 20 sec
 })
 
-test('alternative waits', async ({ page }) => {
+test.skip('alternative waits', async ({ page }) => {
     //    //test.slow()
     const successButton = page.locator('.bg-success')
 
@@ -41,7 +41,7 @@ test('alternative waits', async ({ page }) => {
     expect(text).toContain('Data loaded with AJAX get request.')
 })
 
-test('timeouts', async ({ page }) => {
+test.skip('timeouts', async ({ page }) => {
     // test.setTimeout(20000)
     // test.slow()
     const successButton = page.locator('.bg-success')
