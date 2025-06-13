@@ -45,12 +45,8 @@ Thumbs.db
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-
 /tests/uiComponents.spec.ts-snapshots/
-
 .env
-
 /allure-report/
 /allure-results/
-
 /screenshots/

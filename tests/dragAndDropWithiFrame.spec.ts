@@ -1,8 +1,9 @@
-import { test, expect } from '@playwright/test'
-// import { test } from '../test-options'
+import { expect } from '@playwright/test'               // #67 add
+// import { test, expect } from '@playwright/test'      // #67 change
+import { test } from '../test-options'
 
-test('drag & drop with iframes', async ({ page }) => {
-    // test('drag & drop with iframes', async ({ page, globalQaURL }) => {
+test('drag & drop with iframes', async ({ page, globalQaURL }) => {  // #67 add
+    // test('drag & drop with iframes', async ({ page }) => {           // #67 change
     await page.goto('https://www.globalsqa.com/demo-site/draganddrop/')
     // await page.goto(globalQaURL)
     const frame = page.frameLocator('[rel-title="Photo Manager"] iframe')

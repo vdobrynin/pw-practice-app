@@ -5,13 +5,19 @@ import type { TestOptions } from './test-options';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-require('dotenv').config();  //---> for .env  
-
+require('dotenv').config();  // --> for .env  
+// Determine baseURL from environment
+const baseURL =
+  process.env.DEV === '1'
+    ? 'http://localhost:4201/'
+    : process.env.STAGING === '1'
+      ? 'http://localhost:4202/'
+      : 'http://localhost:4200/';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
-  // export default defineConfig<TestOptions>({
+// export default defineConfig({
+export default defineConfig<TestOptions>({           // add #67
   // timeout: 30000,          // --> same as default
   // globalTimeout: 120000,   // --> not recommend at all (default no timeout)
   expect: {
@@ -54,17 +60,12 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',              // ---> default url ***
-    baseURL: 'http://localhost:4200/',
-
-    // globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
-
-    // baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
-    //   : process.env.STAGING === '1' ? 'http://localhost:4202/'
-    //     : 'http://localhost:4200/',
+    // baseURL: 'http://127.0.0.1:3000',              // --> default url
+    baseURL: 'http://localhost:4200/',             // my default url
+    globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',        
+    trace: 'on-first-retry',
     // screenshot: "only-on-failure",   //---> Capture screenshot after each test failure.
     // actionTimeout: 5000,
     navigationTimeout: 5000,
@@ -77,20 +78,20 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: 'dev',
-    //   use: {
-    //     ...devices['Desktop Chrome'],
-    //     baseURL: 'http://localhost:4201/'
-    //   },
-    // },
-    // {
-    //   name: 'staging',
-    //   use: {
-    //     ...devices['Desktop Chrome'],
-    //     baseURL: 'http://localhost:4202/'
-    //   },
-    // },
+    {
+      name: 'dev',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:4201/'
+      },
+    },
+    {
+      name: 'staging',
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:4202/'
+      },
+    },
     {
       name: 'chrome',
       use: { ...devices['Desktop Chrome'] },
@@ -139,11 +140,11 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
+  //   // command: 'npm run start',       // default
+  //   // url: 'http://127.0.0.1:3000',  // default
   //   reuseExistingServer: !process.env.CI,
   // },
-  // webServer: {                //--->setup for docker
+  // webServer: {                // --> setup for docker
   //   timeout: 2 * 60 * 1000,
   //   command: 'npm run start',
   //   url: 'http://localhost:4200/'

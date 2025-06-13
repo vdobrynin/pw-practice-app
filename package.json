@@ -13,7 +13,10 @@
     "pageObjects-webkit": "npx playwright test usePageObjects.spec.ts --project=webkit",
     "pageObjects-firefox": "npx playwright test usePageObjects.spec.ts --project=firefox",
     "pageObjects-all": "npm run pageObjects-chrome & npm run pageObjects-firefox",
-    "autoWait-dev": "URL=http://uitestingplayground.com/ajax npx playwright test autoWaiting.spec.ts --project=chrome"
+    "autoWait-dev": "URL=http://uitestingplayground.com/ajax npx playwright test autoWaiting.spec.ts --project=chrome",
+    "test:dev": "DEV=1 npx playwright test --project=chrome",
+    "test:staging": "STAGING=1 npx playwright test --project=chrome",
+    "test:default": "npx playwright test --project=chrome"
   },
   "dependencies": {
     "@angular/animations": "^14.2.12",
@@ -74,7 +77,7 @@
     "allure-playwright": "^2.14.1",
     "codelyzer": "^0.0.28",
     "conventional-changelog-cli": "^2.2.2",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.5.0",
     "force": "^0.0.3",
     "npm-run-all": "4.0.2",
     "prettier": "3.5.3",

@@ -24,12 +24,12 @@ test('parametrized methods @smoke', async ({ page }) => {
     await pm.navigateTo().formLayoutsPage()
     await pm.onFormLayoutsPage()
         .submitUsingTheGridFormWithCredentialsAndSelectedOption(process.env.USERNAME, process.env.PASSWORD, 'Option 1')
-    await page.screenshot({ path: 'screenshots/formsLayoutsPage.png', fullPage: true }) // --> screenshot of test
+    await page.screenshot({ path: 'screenshots/formsLayoutsPage1.png', fullPage: true }) // --> screenshot of test
     await pm.onFormLayoutsPage()
         .submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)//with true check box on, w/false empty
-    await page.screenshot({ path: 'screenshots/formsLayoutsPage.png', fullPage: true })
+    await page.screenshot({ path: 'screenshots/formsLayoutsPage2.png', fullPage: true })
     const buffer = await page.screenshot()   // --> save in binary
-    console.log(buffer.toString('base64'))
+    // console.log(buffer.toString('base64')) // if need to print to console
     await page.locator('nb-card', { hasText: "Inline form" })
         .screenshot({ path: 'screenshots/inlineForm.png' }) // -->screenshot for test specific area
   
