@@ -82,14 +82,14 @@ export default defineConfig<TestOptions>({           // add #67
       name: 'dev',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:4201/'
+        // baseURL: 'http://localhost:4201/'
       },
     },
     {
       name: 'staging',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'http://localhost:4202/'
+        // baseURL: 'http://localhost:4202/'
       },
     },
     {
