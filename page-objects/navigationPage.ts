@@ -9,7 +9,7 @@ export class NavigationPage extends HelperBase {
     async formLayoutsPage() {
         await this.selectGroupMenuItem('Forms')
         await this.page.getByText('Form Layouts').click()
-        // await this.waitForNumberOfSeconds(2)             // #52 delay to navigate example from helper base page
+        // await this.waitForNumberOfSeconds(3)             // #52 delay to navigate example from helper base page
     }
 
     async datepickerPage() {

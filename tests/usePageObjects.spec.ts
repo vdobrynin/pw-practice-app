@@ -24,14 +24,15 @@ test('parametrized methods @smoke', async ({ page }) => {
     await pm.navigateTo().formLayoutsPage()
     await pm.onFormLayoutsPage()
         .submitUsingTheGridFormWithCredentialsAndSelectedOption(process.env.USERNAME, process.env.PASSWORD, 'Option 1')
-    // await page.screenshot({ path: 'screenshots/formsLayoutsPage.png' })//--->screenshot for test
-    // const buffer = await page.screenshot()   //---> save in binary
-    // console.log(buffer.toString('base64'))
+    await page.screenshot({ path: 'screenshots/formsLayoutsPage.png', fullPage: true }) // --> screenshot of test
     await pm.onFormLayoutsPage()
         .submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)//with true check box on, w/false empty
-    // await page.locator('nb-card', { hasText: "Inline form" })
-    //     .screenshot({ path: 'screenshots/inlineForm.png' })//--->screenshot for test specific area
-
+    await page.screenshot({ path: 'screenshots/formsLayoutsPage.png', fullPage: true })
+    const buffer = await page.screenshot()   // --> save in binary
+    console.log(buffer.toString('base64'))
+    await page.locator('nb-card', { hasText: "Inline form" })
+        .screenshot({ path: 'screenshots/inlineForm.png' }) // -->screenshot for test specific area
+  
     // await pm.navigateTo().datepickerPage()                           // #63 temporary was comment nex 3 for test faker
     // await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(7)
     // await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(3, 12)
