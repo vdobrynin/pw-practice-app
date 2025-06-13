@@ -14,9 +14,9 @@
     "pageObjects-firefox": "npx playwright test usePageObjects.spec.ts --project=firefox",
     "pageObjects-all": "npm run pageObjects-chrome & npm run pageObjects-firefox",
     "autoWait-dev": "URL=http://uitestingplayground.com/ajax npx playwright test autoWaiting.spec.ts --project=chrome",
-    "test:dev": "DEV=1 npx playwright test --project=chrome",
-    "test:staging": "STAGING=1 npx playwright test --project=chrome",
-    "test:default": "npx playwright test --project=chrome"
+    "test:dev": "DEV=1 npx playwright test usePageObjects.spec.ts --project=chrome",
+    "test:staging": "STAGING=1 npx playwright test dragAndDropWithiFrame.spec.ts --project=firefox",
+    "test:default": "npx playwright test uiComponents.spec.ts --project=chrome"
   },
   "dependencies": {
     "@angular/animations": "^14.2.12",
