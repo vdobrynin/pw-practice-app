@@ -2,6 +2,12 @@ import { defineConfig, devices } from '@playwright/test';
 import type { TestOptions } from './test-options';
 
 require('dotenv').config();
+const baseURL =
+    process.env.DEV === '1'
+        ? 'http://localhost:4201/'
+        : process.env.STAGING === '1'
+            ? 'http://localhost:4202/'
+            : 'http://localhost:4200/';
 
 export default defineConfig<TestOptions>({
     use: {
@@ -11,7 +17,7 @@ export default defineConfig<TestOptions>({
 
     projects: [
         {
-            name: 'chrome',
+            name: 'chromium',
         }
-    ],
+    ]
 });

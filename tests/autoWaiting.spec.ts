@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }, testInfo) => {
     await page.goto(process.env.URL)                                // #67 change from below
     // await page.goto('http://uitestingplayground.com/ajax') 
     await page.getByText('Button Triggering AJAX Request').click();
-    testInfo.setTimeout(testInfo.timeout + 2000) // --> the way add +2 sec timeout
+    testInfo.setTimeout(testInfo.timeout + 2000) //--> add +4 sec timeout(need to kill my VPN)
 })
 
 test('auto waiting', async ({ page }) => {

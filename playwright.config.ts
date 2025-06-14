@@ -18,8 +18,8 @@ const baseURL =
  */
 // export default defineConfig({
 export default defineConfig<TestOptions>({           // add #67
-  // timeout: 30000,          // --> same as default
-  // globalTimeout: 120000,   // --> not recommend at all (default no timeout)
+  timeout: 40000,          // --> same as default
+  globalTimeout: 60000,   // --> not recommend at all (default no timeout)
   expect: {
     timeout: 2000,                        // override +2 sec
     toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
@@ -67,8 +67,8 @@ export default defineConfig<TestOptions>({           // add #67
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     // screenshot: "only-on-failure",   //---> Capture screenshot after each test failure.
-    // actionTimeout: 5000,
-    navigationTimeout: 5000,
+    actionTimeout: 20000,
+    navigationTimeout: 25000,
     video: {                // --> to take video of the tests ***
       // mode: 'on',
       mode: 'off',          // --> default
@@ -82,34 +82,44 @@ export default defineConfig<TestOptions>({           // add #67
       name: 'dev',
       use: {
         ...devices['Desktop Chrome'],
-        // baseURL: 'http://localhost:4201/'
       },
     },
     {
       name: 'staging',
       use: {
-        ...devices['Desktop Chrome'],
-        // baseURL: 'http://localhost:4202/'
+        ...devices['Desktop FireFox'],
       },
     },
     {
-      name: 'chrome',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'chromium',
       // fullyParallel: true 
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        browserName: 'firefox',
+        video: {                
+          mode: 'on',
+          size: { width: 1920, height: 1200 }
+        }
+      }
     },
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'pageObjectFullScreen',
+      testMatch: 'usePageObjects.spec.ts',
+      use: {
+        viewport: { width: 1920, height: 1200 }
+      }
     },
-    {
-      name: 'mobile',                       //---> test for mobile devices ***
-      testMatch: 'testMobile.spec.ts',
-      use: { ...devices['iPhone 13 Pro'] }
-    }
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
+    // {
+    //   name: 'mobile',                       //---> test for mobile devices ***
+    //   testMatch: 'testMobile.spec.ts',
+    //   use: { ...devices['iPhone 13 Pro'] }
+    // }
     // {
     //   name: 'mobile',                       //---> test through viewport for mobile devices ***
     //   testMatch: 'testMobile.spec.ts',
@@ -137,7 +147,6 @@ export default defineConfig<TestOptions>({           // add #67
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
   ],
-
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   // command: 'npm run start',       // default
