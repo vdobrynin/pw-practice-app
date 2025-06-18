@@ -33,7 +33,7 @@ test('parametrized methods @smoke', async ({ page }) => {
     await page.locator('nb-card', { hasText: "Inline form" })
         .screenshot({ path: 'screenshots/inlineForm.png' }) // -->screenshot for test specific area
   
-    // await pm.navigateTo().datepickerPage()                           // #63 temporary was comment nex 3 for test faker
+    // await pm.navigateTo().datepickerPage()      // #63 temporary was comment next 3 for test faker
     // await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(7)
     // await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(3, 12)
 })
