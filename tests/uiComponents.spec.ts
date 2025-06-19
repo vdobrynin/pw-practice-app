@@ -5,9 +5,10 @@ test.beforeEach(async ({ page }) => {
     await page.goto('/')                // --> after setup env var url at config
 })
 
-test.describe('Form Layouts page', () => {
+test.describe('Form Layouts page @block', () => {      // #71.1
+// test.describe('Form Layouts page', () => {     // before #71
     test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
-    // test.describe.configure({ mode: 'serial' })// #65--> input field & radio buttons will executed 1 by 1, the rest in parallel 
+    test.describe.configure({ mode: 'serial' })// #65--> input field & radio buttons will executed 1 by 1, the rest in parallel 
 
     test.beforeEach(async ({ page }) => {
         await page.getByText('Forms').click()

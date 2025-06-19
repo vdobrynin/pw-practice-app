@@ -7,7 +7,9 @@ test.beforeEach(async ({ page }) => {           // after setup env var url at co
     await page.goto('/')
 })
 
-test('navigate to form page @smoke @regression', async ({ page }) => {
+test('navigate to form page @smoke @regression', async ({ page }) => { // #71.1
+// test('navigate to form page @smoke', async ({ page }) => {  // #71.1
+// test('navigate to form page', async ({ page }) => {      // before #71
     const pm = new PageManager(page)
     await pm.navigateTo().formLayoutsPage()
     await pm.navigateTo().datepickerPage()
@@ -16,7 +18,8 @@ test('navigate to form page @smoke @regression', async ({ page }) => {
     await pm.navigateTo().tooltipPage()
 })
 
-test('parametrized methods @smoke', async ({ page }) => {
+test('parametrized methods @smoke', async ({ page }) => {   // #71.1
+// test('parametrized methods', async ({ page }) => {          // before #71
     const pm = new PageManager(page)
     const randomFullName = faker.person.fullName() // #63 --> will replace ALL SPACES that found in text: (/\s+/g, '')                                 
     const randomEmail = `${randomFullName.replace(/\s+/g, '')}${faker.number.int(1000)}@test.com` // #63
