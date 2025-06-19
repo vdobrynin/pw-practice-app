@@ -9,14 +9,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "pageObjects-chrome": "npx playwright test usePageObjects.spec.ts --project=chrome",
+    "pageObjects-chrome": "npx playwright test usePageObjects.spec.ts --project=chromium",
     "pageObjects-webkit": "npx playwright test usePageObjects.spec.ts --project=webkit",
     "pageObjects-firefox": "npx playwright test usePageObjects.spec.ts --project=firefox",
     "pageObjects-all": "npm run pageObjects-chrome & npm run pageObjects-firefox",
-    "autoWait-dev": "URL=http://uitestingplayground.com/ajax npx playwright test autoWaiting.spec.ts --project=chrome",
-    "test:dev": "DEV=1 npx playwright test usePageObjects.spec.ts --project=chrome",
+    "autoWait-dev": "URL=http://uitestingplayground.com/ajax npx playwright test autoWaiting.spec.ts --project=chromium",
+    "test:dev": "DEV=1 npx playwright test usePageObjects.spec.ts --project=chromium",
     "test:staging": "STAGING=1 npx playwright test usePageObjects.spec.ts --project=firefox",
-    "test:default": "npx playwright test uiComponents.spec.ts --project=chrome"
+    "test:default": "npx playwright test uiComponents.spec.ts --project=chromium"
   },
   "dependencies": {
     "@angular/animations": "^14.2.12",
@@ -74,7 +74,7 @@
     "@playwright/test": "^1.53.0",
     "@types/leaflet": "1.2.3",
     "@types/node": "^12.12.70",
-    "allure-playwright": "^2.14.1",
+    "allure-playwright": "^2.15.1",
     "codelyzer": "^0.0.28",
     "conventional-changelog-cli": "^2.2.2",
     "dotenv": "^16.5.0",

@@ -34,13 +34,22 @@ export default defineConfig<TestOptions>({           // add #67
   retries: process.env.CI ? 2 : 1,        // --> from 0 change to 1 to make retries for local computer ***
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined, // #65 should be run 5 but running 4 *** default *** fastest!!!
-  // workers: process.env.CI ? 1 : 5,         // #65 --> this will run 5 workers, not 4 *** 
+  // workers: process.env.CI ? 1 : 5,         // #65 --> this will run 5 workers, not 4 ***
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  // reporter: 'list',                        //---> below different type of reporters ***
+  // reporter: 'html',                      // default
+  // reporter: 'list',                        // #73 --> below different type of reporters ***
   // reporter: 'json',
-  // reporter: [['json', { outputFile: 'test-results/jsonReport.json' }]],
-  // reporter: [
+  // reporter: [['json', { outputFile: 'test-results/jsonReport.json' }]], // #73 save to file
+  // reporter:[                                       // make array of 2 reporters
+  //     ['json', { outputFile: 'test-results/jsonReport.json' }],
+  //   ['junit', { outputFile: 'test-results/junitReport.xml' }]
+  // ],
+  reporter: [                                        // make array of 3 reporters
+    ['json', { outputFile: 'test-results/jsonReport.json' }],
+    ['junit', { outputFile: 'test-results/junitReport.xml' }],
+    ['allure-playwright'],
+  ],
+  // reporter: 
   //   // Use "dot" reporter on CI, "list" otherwise (Playwright default).
   //   process.env.CI ? ["dot"] : ["list"],
   //   // Add Argos reporter.
@@ -51,9 +60,6 @@ export default defineConfig<TestOptions>({           // add #67
   //       token: "cdac4fb8086461e51b437007afb9062c6a1b02bf",
   //     },
   //   ],
-  //   ['json', { outputFile: 'test-results/jsonReport.json' }],
-  //   ['junit', { outputFile: 'test-results/junitReport.xml' }],
-  //   //   ['allure-playwright']
   //   ['html']
   // ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */

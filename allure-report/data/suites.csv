@@ -1,3 +1,4 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Mon Mar 18 20:02:16 PDT 2024","Mon Mar 18 20:02:21 PDT 2024","4585","chromium","usePageObjects.spec.ts","","","","parametrized methods @smoke",""
-"passed","Mon Mar 18 20:02:09 PDT 2024","Mon Mar 18 20:02:16 PDT 2024","6924","chromium","usePageObjects.spec.ts","","","","navigate to form page @smoke @regression",""
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2476","testing with argos ci","chromium","Thu Jun 19 16:08:57 PDT 2025","passed","Thu Jun 19 16:09:00 PDT 2025","","usePageObjects.spec.ts","",""
+"","3506","navigate to form page","chromium","Thu Jun 19 16:08:52 PDT 2025","passed","Thu Jun 19 16:08:55 PDT 2025","","usePageObjects.spec.ts","",""
+"","2353","parametrized methods","chromium","Thu Jun 19 16:08:55 PDT 2025","passed","Thu Jun 19 16:08:57 PDT 2025","","usePageObjects.spec.ts","",""
