@@ -56,26 +56,23 @@ export default defineConfig<TestOptions>({           // add #67
   //   //   ['allure-playwright']
   //   ['html']
   // ],
-
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',              // --> default url
     baseURL: 'http://localhost:4200/',             // my default url
     globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     // screenshot: "only-on-failure",   //---> Capture screenshot after each test failure.
-    actionTimeout: 20000,
-    navigationTimeout: 25000,
+    actionTimeout: 25000,
+    navigationTimeout: 35000,
     video: {                // --> to take video of the tests ***
       // mode: 'on',
       mode: 'off',          // --> default
       size: { width: 1920, height: 1200 }
     }
   },
-
   /* Configure projects for major browsers */
   projects: [
     {
@@ -98,7 +95,7 @@ export default defineConfig<TestOptions>({           // add #67
       name: 'firefox',
       use: {
         browserName: 'firefox',
-        video: {                
+        video: {
           mode: 'on',
           size: { width: 1920, height: 1200 }
         }
@@ -115,22 +112,24 @@ export default defineConfig<TestOptions>({           // add #67
     //   name: 'webkit',
     //   use: { ...devices['Desktop Safari'] },
     // },
+    {
+      name: 'mobile',                       // #72 --> test for mobile devices ***
+      testMatch: 'testMobile.spec.ts',
+      use: {
+        ...devices['iPhone 13 Pro'],
+      }
+    },
     // {
-    //   name: 'mobile',                       //---> test for mobile devices ***
-    //   testMatch: 'testMobile.spec.ts',
-    //   use: { ...devices['iPhone 13 Pro'] }
-    // }
-    // {
-    //   name: 'mobile',                       //---> test through viewport for mobile devices ***
+    //   name: 'mobile',              // #72 --> test through 'viewport' for mobile devices example
     //   testMatch: 'testMobile.spec.ts',
     //   use: {
     //     viewport: { width: 414, height: 800 }
     //   }
-    // }
+    // },
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
+    //   use: { ...devices['Pixel 7'] },
     // },
     // {
     //   name: 'Mobile Safari',
@@ -146,7 +145,7 @@ export default defineConfig<TestOptions>({           // add #67
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+  ]
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   // command: 'npm run start',       // default
