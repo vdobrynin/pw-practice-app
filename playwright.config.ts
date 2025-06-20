@@ -22,7 +22,7 @@ export default defineConfig<TestOptions>({           // add #67
   globalTimeout: 60000,   // --> not recommend at all (default no timeout)
   expect: {
     timeout: 2000,                        // override +2 sec
-    toMatchSnapshot: { maxDiffPixels: 50 } //test will not fail setup it if test not stable
+    toMatchSnapshot: { maxDiffPixels: 50 } // added at #74 test will not fail make it stable
   },
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -40,14 +40,20 @@ export default defineConfig<TestOptions>({           // add #67
   // reporter: 'list',                        // #73 --> below different type of reporters ***
   // reporter: 'json',
   // reporter: [['json', { outputFile: 'test-results/jsonReport.json' }]], // #73 save to file
-  // reporter:[                                       // make array of 2 reporters
+  // reporter:[                                       // make array of 2 reporters #73
   //     ['json', { outputFile: 'test-results/jsonReport.json' }],
   //   ['junit', { outputFile: 'test-results/junitReport.xml' }]
   // ],
-  reporter: [                                        // make array of 3 reporters
+  // reporter: [                                        // make array of 3 reporters #73
+  //   ['json', { outputFile: 'test-results/jsonReport.json' }],
+  //   ['junit', { outputFile: 'test-results/junitReport.xml' }],
+  //   ['allure-playwright'],
+  // ],
+  reporter: [                                        // visual reporters #74
     ['json', { outputFile: 'test-results/jsonReport.json' }],
     ['junit', { outputFile: 'test-results/junitReport.xml' }],
-    ['allure-playwright'],
+    // ['allure-playwright'],
+    ['html']
   ],
   // reporter: 
   //   // Use "dot" reporter on CI, "list" otherwise (Playwright default).
@@ -94,7 +100,7 @@ export default defineConfig<TestOptions>({           // add #67
       },
     },
     {
-      name: 'chromium',
+      name: 'chrome',
       // fullyParallel: true 
     },
     {

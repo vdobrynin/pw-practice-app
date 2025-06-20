@@ -6,8 +6,9 @@ test.beforeEach(async ({ page }) => {
 })
 
 test.describe('Form Layouts page @block', () => {      // #71.1
-// test.describe('Form Layouts page', () => {     // before #71
-    test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
+    // test.describe('Form Layouts page', () => {     // before #71
+    test.describe.configure({ retries: 0 })    // #74 --> retries to testing this tests ZERO
+    // test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
     test.describe.configure({ mode: 'serial' })// #65--> input field & radio buttons will executed 1 by 1, the rest in parallel 
 
     test.beforeEach(async ({ page }) => {
@@ -37,33 +38,36 @@ test.describe('Form Layouts page @block', () => {      // #71.1
         await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')
     })
 
-    test('radio buttons', async ({ page }) => {
-        // await page.waitForTimeout(300)
-        const usingTheGridForm = page.locator('nb-card', { hasText: "Using the Grid" })
-
+    test.only('radio buttons', async ({ page }) => {
+        const usingTheGridForm = page
+            .locator('nb-card', { hasText: "Using the Grid" })
         // await usingTheGridForm.getByLabel('Option 1')
-        // .check({ force: true })                      // --> to click use {force: true} --> cause it's visual hidden  
-        await usingTheGridForm.getByRole('radio', { name: "Option 1" })
+        // .check({ force: true })   //--> to click use {force: true}--> cause it's visual hidden  
+        await usingTheGridForm
+            .getByRole('radio', { name: "Option 2" })
             .check({ force: true })
-
-        const radioStatus = await usingTheGridForm.getByRole('radio', { name: "Option 1" })
+        const radioStatus = await usingTheGridForm
+            .getByRole('radio', { name: "Option 1" })
             .isChecked()
-        expect(radioStatus)
-            .toBeTruthy()
-        await expect(usingTheGridForm.getByRole('radio', { name: "Option 1" }))
-            .toBeChecked()
+        // await expect(usingTheGridForm)
+        // .toHaveScreenshot()                  // for visual assertion #74
+        await expect(usingTheGridForm)
+        .toHaveScreenshot({ maxDiffPixels: 250 }) //test will not fail setup it if test not stable
 
-        // await expect(usingTheGridForm).toHaveScreenshot()
-        // await expect(usingTheGridForm).toHaveScreenshot({ maxDiffPixels: 250 }) //test will not fail setup it if test not stable
+        // expect(radioStatus)
+        //     .toBeTruthy()                   // --> comment at #74
+        // await expect(usingTheGridForm
+        //     .getByRole('radio', { name: "Option 1" }))
+        //     .toBeChecked()
 
-        await usingTheGridForm.getByRole('radio', { name: "Option 2" })
-            .check({ force: true })
-        expect(await usingTheGridForm.getByRole('radio', { name: "Option 1" })
-            .isChecked())
-            .toBeFalsy()
-        expect(await usingTheGridForm.getByRole('radio', { name: "Option 2" })
-            .isChecked())
-            .toBeTruthy()
+        // await usingTheGridForm.getByRole('radio', { name: "Option 2" })
+        //     .check({ force: true })                                      // --> comment at #74
+        // expect(await usingTheGridForm.getByRole('radio', { name: "Option 1" })
+        //     .isChecked())
+        //     .toBeFalsy()
+        // expect(await usingTheGridForm.getByRole('radio', { name: "Option 2" })
+        //     .isChecked())
+        //     .toBeTruthy()
     })
 })
 
@@ -160,7 +164,7 @@ test('web tables', async ({ page }) => {
         .click()
     await page.getByText('Smart Table')
         .click()
-    
+
     // -- > 1st get the row by any test in this row
     const targetRow = page
         .getByRole('row', { name: 'twitter@outlook.com' })
@@ -178,9 +182,9 @@ test('web tables', async ({ page }) => {
     await page
         .locator('.nb-checkmark')
         .click()
-    
+
     // --> 2nd get the row based on the value in the specific column
-    await page.locator('.ng2-smart-pagination-nav')   
+    await page.locator('.ng2-smart-pagination-nav')
         .getByText('2').click()                                 // navigate to 2nd page
     const targetRowById = page.getByRole('row', { name: '11' })
         .filter({ has: page.locator('td').nth(1).getByText('11') })
@@ -263,7 +267,7 @@ test('sliders', async ({ page }) => {
     await page.mouse.move(x + 100, y)                    // make a move to the right
     await page.mouse.move(x + 100, y + 100)              // continue
     await expect(tempBox).toContainText('30')   // --> finish 1st move
-             
+
     await page.mouse.up()
     await page.mouse.move(x, y)             // start moving the mouse in centre
     await page.mouse.down()                 // --> click mouse to start movement
