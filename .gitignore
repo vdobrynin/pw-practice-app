@@ -49,6 +49,7 @@ Thumbs.db
 .env
 /allure-report/
 /allure-results/
+/screenshots/
 
 # Playwright
 node_modules/
