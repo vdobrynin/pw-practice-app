@@ -19,7 +19,7 @@ const baseURL =
 // export default defineConfig({
 export default defineConfig<TestOptions>({           // add #67
   timeout: 40000,          // --> same as default
-  globalTimeout: 60000,   // --> not recommend at all (default no timeout)
+  // globalTimeout: 60000,   // --> not recommend at all (default no timeout) // remove at #77 docker
   expect: {
     timeout: 2000,                        // override +2 sec
     toMatchSnapshot: { maxDiffPixels: 50 } // added at #74 test will not fail make it stable
@@ -100,7 +100,7 @@ export default defineConfig<TestOptions>({           // add #67
       },
     },
     {
-      name: 'chrome',
+      name: 'chromium',
       // fullyParallel: true 
     },
     {
@@ -157,16 +157,16 @@ export default defineConfig<TestOptions>({           // add #67
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ]
+  ],
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   // command: 'npm run start',       // default
   //   // url: 'http://127.0.0.1:3000',  // default
   //   reuseExistingServer: !process.env.CI,
   // },
-  // webServer: {                // --> setup for docker
-  //   timeout: 2 * 60 * 1000,
-  //   command: 'npm run start',
-  //   url: 'http://localhost:4200/'
-  // }
+  webServer: {                // --> setup for docker #77
+    timeout: 2 * 60 * 1000,   // without it my tests fail out off time limit
+    command: 'npm run start',
+    url: 'http://localhost:4200/'
+  }
 });
