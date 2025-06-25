@@ -41,10 +41,10 @@ test('parametrized methods', async ({ page }) => {       // before #71 & change 
     await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(3, 12)
 })
 
-// test('testing with argos ci', async ({ page }) => {  // commented at #77 docker     
-//     const pm = new PageManager(page)
-//     await pm.navigateTo().formLayoutsPage()
-//     await argosScreenshot(page, "form layout page");
-//     await pm.navigateTo().datepickerPage()
-//     await argosScreenshot(page, "datepicker page");
-// })
+test.only('testing with argos ci', async ({ page }) => {  // commented at #77 docker     
+    const pm = new PageManager(page)
+    await pm.navigateTo().formLayoutsPage()
+    await argosScreenshot(page, "form layout page");
+    await pm.navigateTo().datepickerPage()
+    await argosScreenshot(page, "datepicker page");
+})

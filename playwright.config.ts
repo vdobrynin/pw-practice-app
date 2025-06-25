@@ -55,19 +55,6 @@ export default defineConfig<TestOptions>({           // add #67
     // ['allure-playwright'],
     ['html']
   ],
-  // reporter: 
-  //   // Use "dot" reporter on CI, "list" otherwise (Playwright default).
-  //   process.env.CI ? ["dot"] : ["list"],
-  //   // Add Argos reporter.
-  //   ["@argos-ci/playwright/reporter",
-  //     { // Upload to Argos on CI only.
-  //       uploadToArgos: !!process.env.CI,
-  //       // Set your Argos token (required if not using GitHub Actions).
-  //       token: "cdac4fb8086461e51b437007afb9062c6a1b02bf",
-  //     },
-  //   ],
-  //   ['html']
-  // ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
