@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
     await page.getByText('Form Layouts').click()
 })
 
-test('Locator syntax rules', async ({ page }) => {
+test.only('Locator syntax rules', async ({ page }) => { 
     //by Tag name
     await page.locator('input').first().click() // --> find first input
 

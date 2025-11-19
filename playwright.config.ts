@@ -63,13 +63,14 @@ export default defineConfig<TestOptions>({           // add #67
     globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    // trace: 'on',           // --> generate screenshot every time
     // screenshot: "only-on-failure",   //---> Capture screenshot after each test failure.
     actionTimeout: 25000,
     navigationTimeout: 35000,
     video: {                // --> to take video of the tests ***
       // mode: 'on',
       mode: 'off',          // --> default
-      size: { width: 1920, height: 1200 }
+      size: { width: 2056, height: 1329 }
     }
   },
   /* Configure projects for major browsers */
@@ -96,7 +97,7 @@ export default defineConfig<TestOptions>({           // add #67
         browserName: 'firefox',
         video: {
           mode: 'on',
-          size: { width: 1920, height: 1200 }
+          size: { width: 2056, height: 1329 }
         }
       }
     },
@@ -104,7 +105,7 @@ export default defineConfig<TestOptions>({           // add #67
       name: 'pageObjectFullScreen',
       testMatch: 'usePageObjects.spec.ts',
       use: {
-        viewport: { width: 1920, height: 1200 }
+        viewport: { width: 2056, height: 1329 }
       }
     },
     // {
