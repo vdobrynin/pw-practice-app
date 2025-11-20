@@ -45,7 +45,7 @@ test.only('User facing locators', async ({ page }) => {
     await page.getByLabel('Email').first().click()
     await page.getByPlaceholder('Jane Doe').click()
     await page.getByText('Using the Grid').click()
-    await page.getByTestId('SignIn').click()        // ---> custom id by me (change in source html code)
+    await page.getByTestId('SignIn').click()        // --> custom id by me (change in html - source code)
     await page.getByTitle('IoT Dashboard').click()
 })
 
