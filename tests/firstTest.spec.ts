@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
     await page.getByText('Form Layouts').click()
 })
 
-test.only('Locator syntax rules', async ({ page }) => {                     
+test('Locator syntax rules', async ({ page }) => {                     
     //by Tag name                                                           // #24
     await page.locator('input').first().click() // --> find first input
 
@@ -38,9 +38,9 @@ test.only('Locator syntax rules', async ({ page }) => {
     page.locator(':text-is("Using the Grid)')
 })
 
-test('User facing locators', async ({ page }) => {                          
+test.only('User facing locators', async ({ page }) => {                          
     await page.getByRole('textbox', { name: "Email" }).first().click()     // #25
-    await page.getByRole('button', { name: "Sign in" }).first().click()
+    await page.getByRole('button', { name: "Sign in" } ).first().click()
 
     await page.getByLabel('Email').first().click()
     await page.getByPlaceholder('Jane Doe').click()
