@@ -6,30 +6,30 @@ test.beforeEach(async ({ page }) => {
     await page.getByText('Form Layouts').click()
 })
 
-test.only('Locator syntax rules', async ({ page }) => { 
+test('Locator syntax rules', async ({ page }) => {                     // #24
     //by Tag name
     await page.locator('input').first().click() // --> find first input
 
     //by ID
-    page.locator('#inputEmail1') // this one doing nothing
+    await page.locator('#inputEmail1').click() // this one doing nothing
 
     //by Class value
-    // await page.locator('.shape-rectangle')  // -->.<-- looking for class with separate values
+    page.locator('.shape-rectangle')  // -->.<-- looking for class with separate values
 
     //by attribute
-    await page.locator('[placeholder="Email"]').first().click() // this a click on input
+    page.locator('[placeholder="Email"]') //.first().click() // this a click on input
 
     //by Class value (full)
     page.locator('[class="input-full-width size-medium status-basic shape-rectangle nb-transition"]')
 
     // //combine different selectors
-    // page.locator('input[placeholder="Email"].shape-rectangle') //do not put space between attr
+    page.locator('input[placeholder="Email"].shape-rectangle') //do not put space between attribute
 
     //combine different selectors
-    page.locator('input[placeholder="Email"][nbinput]') //do not put space between even 2nd attr
+    page.locator('input[placeholder="Email"][nbinput]') //do not put space between even 2nd attribute
 
     //by XPath --> (NOT RECOMMENDED)
-    page.locator('//*[@id="inputEmail1]')
+    // page.locator('//*[@id="inputEmail1]')    // --> NOT RECOMMENDED
 
     //by partial page match
     page.locator(':text("Using)')
