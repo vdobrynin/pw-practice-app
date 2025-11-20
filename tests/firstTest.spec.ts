@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
     await page.getByText('Form Layouts').click()
 })
 
-test('Locator syntax rules', async ({ page }) => {                     
+test('Locator syntax rules', async ({ page }) => {
     //by Tag name                                                           // #24
     await page.locator('input').first().click() // --> find first input
 
@@ -29,7 +29,7 @@ test('Locator syntax rules', async ({ page }) => {
     page.locator('input[placeholder="Email"][nbinput]') //do not put space between even 2nd attribute
 
     //by XPath --> (NOT RECOMMENDED)
-    // page.locator('//*[@id="inputEmail1]')    // --> NOT RECOMMENDED
+    // page.locator('//*[@id="inputEmail1]')    // --> NOT RECOMMENDED ***
 
     //by partial page match
     page.locator(':text("Using)')
@@ -38,22 +38,22 @@ test('Locator syntax rules', async ({ page }) => {
     page.locator(':text-is("Using the Grid)')
 })
 
-test.only('User facing locators', async ({ page }) => {                          
+test('User facing locators', async ({ page }) => {
     await page.getByRole('textbox', { name: "Email" }).first().click()     // #25
-    await page.getByRole('button', { name: "Sign in" } ).first().click()
+    await page.getByRole('button', { name: "Sign in" }).first().click()
 
     await page.getByLabel('Email').first().click()
     await page.getByPlaceholder('Jane Doe').click()
     await page.getByText('Using the Grid').click()
-    await page.getByTestId('SignIn').click()        // --> custom id by me (change in html - source code)
+    await page.getByTestId('SignIn').click()        // --> custom id by me (change in html - source code ***)
     await page.getByTitle('IoT Dashboard').click()
 })
 
-test('locating child elements', async ({ page }) => {
-    await page.locator('nb-card nb-radio :text-is("Option 1")').click()
+test.only('locating child elements', async ({ page }) => {
+    await page.locator('nb-card nb-radio :text-is("Option 1")').click()         // #26
     await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click()//locators one by one
     await page.locator('nb-card').getByRole('button', { name: "Sign in" }).first().click()// combination of locator & byRole
-    await page.locator('nb-card').nth(3).getByRole('button').click()    // --> try to avoid by index
+    // await page.locator('nb-card').nth(3).getByRole('button').click()    // --> try to avoid by index ***
 })
 
 test('location parent element', async ({ page }) => {               // nb-card <-- uniq locator
@@ -117,26 +117,26 @@ test('extracting values', async ({ page }) => {
         .allTextContents()
     expect(allRadioButtonsLabels).toContain("Option 1")
 
-        // --> input value
-        const emailField = basicForm.getByRole('textbox', { name: "Email" })
-        await emailField.fill('test@test.com')
-        const emailValue = await emailField.inputValue()
-        expect(emailValue).toEqual('test@test.com')
+    // --> input value
+    const emailField = basicForm.getByRole('textbox', { name: "Email" })
+    await emailField.fill('test@test.com')
+    const emailValue = await emailField.inputValue()
+    expect(emailValue).toEqual('test@test.com')
 
-        const placeholderValue = await emailField.getAttribute('placeholder')
-        expect(placeholderValue).toEqual('Email')
+    const placeholderValue = await emailField.getAttribute('placeholder')
+    expect(placeholderValue).toEqual('Email')
 })
 
 test('assertions', async ({ page }) => {
     const basicFormButton = page.locator('nb-card')
         .filter({ hasText: "Basic form" })
         .locator('button')
-    
+
     // --> general assertions
     const value = 5
     expect(value).toEqual(5)
 
-    const text = await basicFormButton.textContent()  
+    const text = await basicFormButton.textContent()
     expect(text).toEqual('Submit')
 
     // --> locator assertion
