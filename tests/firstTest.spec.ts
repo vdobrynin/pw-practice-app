@@ -116,9 +116,7 @@ test('extracting values', async ({ page }) => {
 })
 
 test('assertions', async ({ page }) => {
-    const basicFormButton = page.locator('nb-card')
-        .filter({ hasText: "Basic form" })
-        .locator('button')
+    const basicFormButton = page.locator('nb-card').filter({ hasText: "Basic form" }).locator('button')
 
     // --> general assertions
     const value = 5
@@ -131,6 +129,6 @@ test('assertions', async ({ page }) => {
     await expect(basicFormButton).toHaveText('Submit')
 
     // --> soft assertion
-    await expect.soft(basicFormButton).toHaveText('Submit')
+    await expect.soft(basicFormButton).toHaveText('Submit') // not good practice
     await basicFormButton.click()
 })
