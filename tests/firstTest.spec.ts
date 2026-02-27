@@ -71,14 +71,14 @@ test('location parent element', async ({ page }) => {               // #27 --> n
         .filter({ has: page.locator('.status-danger') })
         .getByRole('textbox', { name: "Password" }).click()         // choose color & password
 
-    await page.locator('nb-card')
-        .filter({ has: page.locator('nb-checkbox') })
+    await page.locator('nb-card')                           
+        .filter({ has: page.locator('nb-checkbox') })               // two filters
         .filter({ hasText: "Sign in" })
         .getByRole('textbox', { name: "Email" }).click()
 
-    await page.locator(':text-is("Using the Grid")')
-        .locator('..')
-        .getByRole('textbox', { name: "Password" }).click() //--> can use it, but not recommend
+    // await page.locator(':text-is("Using the Grid")')
+    //     .locator('..')
+    //     .getByRole('textbox', { name: "Password" }).click()  //--> can use it, but not recommend
 })
 
 test('reusing the locators', async ({ page }) => {
