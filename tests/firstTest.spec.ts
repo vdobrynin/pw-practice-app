@@ -82,26 +82,17 @@ test('location parent element', async ({ page }) => {               // #27 --> n
 })
 
 test('reusing the locators', async ({ page }) => {
-    const basicForm = page.locator('nb-card')
-        .filter({ hasText: "Basic form" })
-    const emailField = basicForm
-        .getByRole('textbox', { name: "Email" })
-    const passwordField = basicForm
-        .getByRole('textbox', { name: "Password" })
+    const basicForm = page.locator('nb-card').filter({ hasText: "Basic form" })
+    const emailField = basicForm.getByRole('textbox', { name: "Email" })
+    const passwordField = basicForm.getByRole('textbox', { name: "Password" })
 
-    await emailField
-        .fill('test@test.com')
-    await passwordField
-        .fill('Welcome123')
-    await basicForm
-        .locator('nb-checkbox').click()
-    await basicForm
-        .getByRole('button').click()
+    await emailField.fill('test@test.com')
+    await passwordField.fill('Welcome123')
+    await basicForm.locator('nb-checkbox').click()
+    await basicForm.getByRole('button').click()
 
-    await expect(emailField)
-        .toHaveValue('test@test.com') // --> assertion for email
-    await expect(passwordField)
-        .toHaveValue('Welcome123') // --> assertion for password
+    await expect(emailField).toHaveValue('test@test.com') // --> assertion for email
+    await expect(passwordField).toHaveValue('Welcome123') // --> assertion for password
 })
 
 test('extracting values', async ({ page }) => {
