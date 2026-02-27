@@ -7,34 +7,34 @@ test.beforeEach(async ({ page }) => {
 })
 
 test('Locator syntax rules', async ({ page }) => {
-    //by Tag name                                                           // #21 *02.25.2026
+    // find by tag name                                                           // #24 *02.26.2026
     await page.locator('input').first().click() // --> find first input
+    
+    // find by id
+    page.locator('#inputEmail1') // this one doing nothing
 
-    //by ID
-    await page.locator('#inputEmail1').click() // this one doing nothing
-
-    //by Class value
+    // find by class value
     page.locator('.shape-rectangle')  // -->.<-- looking for class with separate values
 
-    //by attribute
+    // find by attribute
     page.locator('[placeholder="Email"]') //.first().click() // this a click on input
 
-    //by Class value (full)
+    // find by class value (full value)
     page.locator('[class="input-full-width size-medium status-basic shape-rectangle nb-transition"]')
 
-    // //combine different selectors
-    page.locator('input[placeholder="Email"].shape-rectangle') //do not put space between attribute
+    // find combine different selectors
+    page.locator('input[placeholder="Email"].shape-rectangle') //do not put space between attributes
 
-    //combine different selectors
-    page.locator('input[placeholder="Email"][nbinput]') //do not put space between even 2nd attribute
+    // find combine different selectors
+    page.locator('input[placeholder="Email"][nbinput]') //do not put space between 2nd attributes
 
-    //by XPath --> (NOT RECOMMENDED)
+    // find by XPath --> (NOT RECOMMENDED)
     // page.locator('//*[@id="inputEmail1]')    // --> NOT RECOMMENDED ***
 
-    //by partial page match
+    // find by partial text page match
     page.locator(':text("Using)')
 
-    //by exact text match
+    // find by exact text match
     page.locator(':text-is("Using the Grid)')
 })
 
