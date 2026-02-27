@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
 test('Locator syntax rules', async ({ page }) => {
     // find by tag name                                                           // #24 *02.26.2026
     await page.locator('input').first().click() // --> find first input
-    
+
     // find by id
     page.locator('#inputEmail1') // this one doing nothing
 
@@ -44,16 +44,16 @@ test('user facing locators', async ({ page }) => {
 
     await page.getByLabel('Email').first().click()
     await page.getByPlaceholder('Jane Doe').click()
-    await page.getByText('Using the Grid').click() 
+    await page.getByText('Using the Grid').click()
     await page.getByTestId('SignIn').click() //--> custom id by me(add in html - in source code *** 'data-testid="SignIn'") 'data-testid' reserve word
     await page.getByTitle('IoT Dashboard').click()
 })
 
 test('locating child elements', async ({ page }) => {
-    await page.locator('nb-card nb-radio :text-is("Option 1")').click()         // #26
-    await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click()//locators one by one
-    await page.locator('nb-card').getByRole('button', { name: "Sign in" }).first().click()// combination of locator & byRole
-    // await page.locator('nb-card').nth(3).getByRole('button').click()    // --> try to avoid by index ***
+    await page.locator('nb-card nb-radio :text-is("Option 1")').click()     // #26 child elements
+    await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click() // chain locators one by one
+    await page.locator('nb-card').getByRole('button', { name: "Sign in" }).first().click() // combination of locator & byRole
+    // // await page.locator('nb-card').nth(3).getByRole('button').click()    //--> try to avoid by index ***
 })
 
 test('location parent element', async ({ page }) => {               // #27 --> nb-card <-- uniq locator
