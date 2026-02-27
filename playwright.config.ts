@@ -18,7 +18,7 @@ const baseURL =
  */
 // export default defineConfig({
 export default defineConfig<TestOptions>({           // add #67
-  timeout: 40000,          // --> same as default
+  // timeout: 40000,          // --> same as default
   // globalTimeout: 60000,   // --> not recommend at all (default no timeout) // remove at #77 docker
   expect: {
     timeout: 2000,                        // override +2 sec
