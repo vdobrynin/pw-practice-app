@@ -96,26 +96,23 @@ test('reusing the locators', async ({ page }) => {
 })
 
 test('extracting values', async ({ page }) => {
-    //--> single text value
-    const basicForm = page.locator('nb-card')
-        .filter({ hasText: "Basic form" })
-    const buttonText = await basicForm
-        .locator('button').textContent()
-    expect(buttonText).toEqual('Submit')    // assertion
+    //--> single text value use 'textContent()'
+    const basicForm = page.locator('nb-card').filter({ hasText: "Basic form" })
+    const buttonText = await basicForm.locator('button').textContent()
+    expect(buttonText).toEqual('Submit')                // assertion
 
-    // --> all text values
-    const allRadioButtonsLabels = await page.locator('nb-radio')
-        .allTextContents()
-    expect(allRadioButtonsLabels).toContain("Option 1")
+    //--> all text values use 'allTextContents()'
+    const allRadioButtonsLabels = await page.locator('nb-radio').allTextContents()
+    expect(allRadioButtonsLabels).toContain("Option 1") // assertion
 
-    // --> input value
+    //--> input value use 'inputValue()'
     const emailField = basicForm.getByRole('textbox', { name: "Email" })
     await emailField.fill('test@test.com')
     const emailValue = await emailField.inputValue()
-    expect(emailValue).toEqual('test@test.com')
+    expect(emailValue).toEqual('test@test.com')     // assertion 
 
-    const placeholderValue = await emailField.getAttribute('placeholder')
-    expect(placeholderValue).toEqual('Email')
+    const placeholderValue = await emailField.getAttribute('placeholder') // use 'getAttribute' to see value of it
+    expect(placeholderValue).toEqual('Email')       // assertion
 })
 
 test('assertions', async ({ page }) => {
