@@ -1,42 +1,41 @@
-// import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 // // test.describe.configure({ mode: 'parallel' }) // ---> to run in parallel only this file
-// test.beforeEach(async ({ page }) => {
-//     await page.goto('/')                // --> after setup env var url at config
-// })
+test.beforeEach(async ({ page }) => {
+    await page.goto('/')                // --> after setup env var url at config
+})
 
-// test.describe('Form Layouts page @block', () => {      // #71.1
-//     // test.describe('Form Layouts page', () => {     // before #71
-//     test.describe.configure({ retries: 0 })    // #74 --> retries to testing this tests ZERO
-//     // test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
-//     test.describe.configure({ mode: 'serial' })// #65--> input field & radio buttons will executed 1 by 1, the rest in parallel 
+// test.describe('Form Layouts page @block', () => {      // at #33.1
+test.describe('Form Layouts page', () => {     // that was before at #33
+    // test.describe.configure({ retries: 0 })    // #74 --> retries to testing this tests ZERO
+    // test.describe.configure({ retries: 2 })    // #64 --> retries to testing this tests TWICE
+    // test.describe.configure({ mode: 'serial' })// #65--> input field & radio buttons will executed 1 by 1, the rest in parallel 
 
-//     test.beforeEach(async ({ page }) => {
-//         await page.getByText('Forms').click()
-//         await page.getByText('Form Layouts').click()
-//     })
+    test.beforeEach(async ({ page }) => {
+        await page.getByText('Forms').click()
+        await page.getByText('Form Layouts').click()
+    })
 
-//     test('input fields', async ({ page }, testInfo) => {    // #33 // --> at #64 add testInfo
-//         // if (testInfo.retry) {                // #64 --> example before next retry to cleanup Data Base (pre-conditions)
-//         //     // do something
-//         // }
-//         const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" })
-//             .getByRole('textbox', { name: "Email" })
-//         await usingTheGridEmailInput.fill('test@test.com')
-//         await usingTheGridEmailInput.clear()
-//         await usingTheGridEmailInput.pressSequentially('test2@test.com')
-//         // await usingTheGridEmailInput.pressSequentially('test2@test.com', { delay: 200 }) //#65 remove for being delay
-//         // await usingTheGridEmailInput.type('test2@test.com') // deprecated
+    test('input fields', async ({ page }, testInfo) => {    // #33 // --> at #64 add testInfo
+        // if (testInfo.retry) {                // #64 --> example before next retry to cleanup Data Base (pre-conditions)
+        //     // do something
+        // }
+        const usingTheGridEmailInput = page.locator('nb-card', { hasText: "Using the Grid" }) // #33
+            .getByRole('textbox', { name: "Email" })
+        await usingTheGridEmailInput.fill('test@test.com')
+        await usingTheGridEmailInput.clear()
+        await usingTheGridEmailInput.pressSequentially('test2@test.com', { delay: 200 }) // #33 //#65 remove for being delay
+        // await usingTheGridEmailInput.type('test2@test.com') // --> deprecated
 
-//         //generic assertion
-//         const inputValue = await usingTheGridEmailInput.inputValue()
-//         expect(inputValue).toEqual('test2@test.com')
-//         // expect(inputValue).toEqual('test2@test.com1')     // #64 for test retry -->#64<-- example for test to fail
+        // // generic assertion
+        const inputValue = await usingTheGridEmailInput.inputValue()
+        expect(inputValue).toEqual('test2@test.com')
+        // expect(inputValue).toEqual('test2@test.com1')     // #64 for test retry -->#64<-- example for test to fail
 
-//         //locator assertion
-//         expect(inputValue).toEqual('test2@test.com')
-//         await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')
-//     })
+        // // locator assertion
+        await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')
+    })
+})
 
 //     test.only('radio buttons', async ({ page }) => {
 //         const usingTheGridForm = page
