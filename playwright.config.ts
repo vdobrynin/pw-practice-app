@@ -18,10 +18,10 @@ const baseURL =
  */
 // export default defineConfig({
 export default defineConfig<TestOptions>({           // add #67
-  // timeout: 40000,          // --> same as default
-  // globalTimeout: 60000,   // --> not recommend at all (default no timeout) // remove at #77 docker
+  timeout: 30000,          // --> same as default               // #32
+  globalTimeout: 60000,   // --> not recommend at all (default no timeout) // #32  // remove at #77 docker
   expect: {
-    timeout: 2000,                        // override +2 sec
+    timeout: 5000,                        // override +54 sec // #32
     toMatchSnapshot: { maxDiffPixels: 50 } // added at #74 test will not fail make it stable
   },
   testDir: './tests',
@@ -65,8 +65,8 @@ export default defineConfig<TestOptions>({           // add #67
     trace: 'on-first-retry',
     // trace: 'on',           // --> generate screenshot every time
     // screenshot: "only-on-failure",   //---> Capture screenshot after each test failure.
-    actionTimeout: 25000,
-    navigationTimeout: 35000,
+    // actionTimeout: 5000,       // #32
+    navigationTimeout: 5000,      // #32
     video: {                // --> to take video of the tests ***
       // mode: 'on',
       mode: 'off',          // --> default

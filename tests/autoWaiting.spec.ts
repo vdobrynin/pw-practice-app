@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
+import { timeout } from 'rxjs/operators';
 
 test.beforeEach(async ({ page }, testInfo) => {
     // await page.goto(process.env.URL)                                // #67 change from below
     await page.goto('http://uitestingplayground.com/ajax')                  // #31 auto-waiting
     await page.getByText('Button Triggering AJAX Request').click();
-    // testInfo.setTimeout(testInfo.timeout + 5000) //--> add +4 sec timeout (need to kill my VPN)
+    // testInfo.setTimeout(testInfo.timeout + 5000) //--> add +5 sec timeout (need to kill my VPN) // #32
 })
 
 test('auto-waiting', async ({ page }) => {                  // #31
@@ -39,9 +40,10 @@ test('alternative waits', async ({ page }) => {         // #31.1 --> need to kil
     expect(text).toContain('Data loaded with AJAX get request.')
 })
 
-// test('timeouts', async ({ page }) => {
-//     // test.setTimeout(20000)
-//     // test.slow()
-//     const successButton = page.locator('.bg-success')
-//     await successButton.click()
-// })
+test('timeouts', async ({ page }) => {          // #32
+    // test.setTimeout(20000)
+    // test.slow()
+    const successButton = page.locator('.bg-success')
+    // await successButton.click({ timeout: 16000 }) // ~15480 this'll override actionTimeout in .*config.ts file
+    await successButton.click()
+})
