@@ -84,38 +84,38 @@ test('checkboxes', async ({ page }) => {
     }
 })
 
-// test('lists and dropouts', async ({ page }) => {
-//     const dropDownMenu = page.locator('ngx-header nb-select')
-//     await dropDownMenu.click()
+test('lists and dropouts', async ({ page }) => {
+    const dropDownMenu = page.locator('ngx-header nb-select')
+    await dropDownMenu.click()
 
-//     page.getByRole('list')   // when the list has --> UL tag --> we using this cause it's on the page
-//     // page.getByRole('listitem')  // when the list has --> LI tag
+    page.getByRole('list')   // when the list has --> 'UL' tag --> we using this cause it's on the page
+    // page.getByRole('listitem')  // when the list has --> 'LI' tag
 
-//     // const optionList = page.getByRole('list').locator('nb-option')
-//     const optionList = page.locator('nb-option-list nb-option')     // ---> teacher prefer !!!
-//     await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"]) // --> check to all
-//     await optionList.filter({ hasText: "Cosmic" }).click()  // --> cosmic only
-//     // await optionList.filter({ hasText: "Dark" }).click()  // --> dark only
+    // const optionList = page.getByRole('list').locator('nb-option')
+    const optionList = page.locator('nb-option-list nb-option')                   // ---> teacher prefer !!!
+    await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"]) // --> check to all present
+    // await optionList.filter({ hasText: "Dark" }).click()                        // --> dark only
+    await optionList.filter({ hasText: "Cosmic" }).click()                   // --> cosmic only
 
-//     const header = page.locator('nb-layout-header')         // --> check the header color
-//     await expect(header).toHaveCSS('background-color', 'rgb(50, 50, 89)')
+    const header = page.locator('nb-layout-header')         // --> check the header color
+    await expect(header).toHaveCSS('background-color', 'rgb(50, 50, 89)')
 
-//     const colors = {
-//         "Light": "rgb(255, 255, 255)",
-//         "Dark": "rgb(34, 43, 69)",
-//         "Cosmic": "rgb(50, 50, 89)",
-//         "Corporate": "rgb(255, 255, 255)"
-//     }
+    const colors = {
+        "Light": "rgb(255, 255, 255)",
+        "Dark": "rgb(34, 43, 69)",
+        "Cosmic": "rgb(50, 50, 89)",
+        "Corporate": "rgb(255, 255, 255)"
+    }
 
-//     await dropDownMenu.click()          // to open dropdown
-//     for (const color in colors) {
-//         await optionList.filter({ hasText: color }).click()
-//         await expect(header).toHaveCSS('background-color', colors[color])
-//         if (color != "Corporate") {
-//             await dropDownMenu.click()      // to re-open dropdown
-//         }
-//     }
-// })
+    await dropDownMenu.click()          // to open dropdown
+    for (const color in colors) {
+        await optionList.filter({ hasText: color }).click()
+        await expect(header).toHaveCSS('background-color', colors[color])
+        if (color != "Corporate") {
+            await dropDownMenu.click()      // to re-open dropdown
+        }
+    }
+})
 
 // test('tooltips', async ({ page }) => {
 //     await page.getByText('Modal & Overlays').click()
